@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.RegCqIssueInfoHypoledgeInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.RegCqIssueInfoHypoledgeInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="issue_info_gid" property="issueInfoGid" jdbcType="VARCHAR" />
+    <result column="guar_contract_no" property="guarContractNo" jdbcType="VARCHAR" />
+    <result column="warrant_no" property="warrantNo" jdbcType="VARCHAR" />
+    <result column="hypopledge_amount" property="hypopledgeAmount" jdbcType="DECIMAL" />
+    <result column="is_write_off" property="isWriteOff" jdbcType="VARCHAR" />
+    <result column="write_off_date" property="writeOffDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reg_cq_issue_info_hypoledge_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefinance.regulation.domain.RegCqIssueInfoHypoledgeInfo" >
+    insert into reg_cq_issue_info_hypoledge_info (id, issue_info_gid, guar_contract_no, 
+      warrant_no, hypopledge_amount, is_write_off, 
+      write_off_date)
+    values (#{id,jdbcType=INTEGER}, #{issueInfoGid,jdbcType=VARCHAR}, #{guarContractNo,jdbcType=VARCHAR}, 
+      #{warrantNo,jdbcType=VARCHAR}, #{hypopledgeAmount,jdbcType=DECIMAL}, #{isWriteOff,jdbcType=VARCHAR}, 
+      #{writeOffDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lefinance.regulation.domain.RegCqIssueInfoHypoledgeInfo" >
+    update reg_cq_issue_info_hypoledge_info
+    set issue_info_gid = #{issueInfoGid,jdbcType=VARCHAR},
+      guar_contract_no = #{guarContractNo,jdbcType=VARCHAR},
+      warrant_no = #{warrantNo,jdbcType=VARCHAR},
+      hypopledge_amount = #{hypopledgeAmount,jdbcType=DECIMAL},
+      is_write_off = #{isWriteOff,jdbcType=VARCHAR},
+      write_off_date = #{writeOffDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, issue_info_gid, guar_contract_no, warrant_no, hypopledge_amount, is_write_off, 
+    write_off_date
+    from reg_cq_issue_info_hypoledge_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, issue_info_gid, guar_contract_no, warrant_no, hypopledge_amount, is_write_off, 
+    write_off_date
+    from reg_cq_issue_info_hypoledge_info
+  </select>
+</mapper>

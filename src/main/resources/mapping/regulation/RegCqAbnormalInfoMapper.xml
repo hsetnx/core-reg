@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.RegCqAbnormalInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.RegCqAbnormalInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gid" property="gid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="return_code" property="returnCode" jdbcType="VARCHAR" />
+    <result column="return_desc" property="returnDesc" jdbcType="VARCHAR" />
+    <result column="return_data" property="returnData" jdbcType="VARCHAR" />
+    <result column="trans_return_code" property="transReturnCode" jdbcType="CHAR" />
+    <result column="trans_return_desc" property="transReturnDesc" jdbcType="VARCHAR" />
+    <result column="is_success" property="isSuccess" jdbcType="BIT" />
+    <result column="next_time" property="nextTime" jdbcType="TIMESTAMP" />
+    <result column="retry_num" property="retryNum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="batch_gid" property="batchGid" jdbcType="VARCHAR" />
+    <result column="report_time" property="reportTime" jdbcType="TIMESTAMP" />
+    <result column="report_type" property="reportType" jdbcType="VARCHAR" />
+    <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+    <result column="customer_type" property="customerType" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="certificate_type" property="certificateType" jdbcType="VARCHAR" />
+    <result column="certificate_no" property="certificateNo" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="zone" property="zone" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="VARCHAR" />
+    <result column="end_date" property="endDate" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="reserved_field1" property="reservedField1" jdbcType="VARCHAR" />
+    <result column="reserved_field2" property="reservedField2" jdbcType="VARCHAR" />
+    <result column="reserved_field3" property="reservedField3" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reg_cq_abnormal_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefinance.regulation.domain.RegCqAbnormalInfo" >
+    insert into reg_cq_abnormal_info (id, gid, create_time, 
+      update_time, create_user, update_user, 
+      return_code, return_desc, return_data, 
+      trans_return_code, trans_return_desc, is_success, 
+      next_time, retry_num, status, 
+      batch_gid, report_time, report_type, 
+      org_code, customer_type, customer_name, 
+      certificate_type, certificate_no, reason, 
+      industry, zone, start_date, 
+      end_date, remark, reserved_field1, 
+      reserved_field2, reserved_field3)
+    values (#{id,jdbcType=INTEGER}, #{gid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{returnCode,jdbcType=VARCHAR}, #{returnDesc,jdbcType=VARCHAR}, #{returnData,jdbcType=VARCHAR}, 
+      #{transReturnCode,jdbcType=CHAR}, #{transReturnDesc,jdbcType=VARCHAR}, #{isSuccess,jdbcType=BIT}, 
+      #{nextTime,jdbcType=TIMESTAMP}, #{retryNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{batchGid,jdbcType=VARCHAR}, #{reportTime,jdbcType=TIMESTAMP}, #{reportType,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{customerType,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{certificateType,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{industry,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR}, #{startDate,jdbcType=VARCHAR}, 
+      #{endDate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{reservedField1,jdbcType=VARCHAR}, 
+      #{reservedField2,jdbcType=VARCHAR}, #{reservedField3,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lefinance.regulation.domain.RegCqAbnormalInfo" >
+    update reg_cq_abnormal_info
+    set gid = #{gid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      return_code = #{returnCode,jdbcType=VARCHAR},
+      return_desc = #{returnDesc,jdbcType=VARCHAR},
+      return_data = #{returnData,jdbcType=VARCHAR},
+      trans_return_code = #{transReturnCode,jdbcType=CHAR},
+      trans_return_desc = #{transReturnDesc,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=BIT},
+      next_time = #{nextTime,jdbcType=TIMESTAMP},
+      retry_num = #{retryNum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      batch_gid = #{batchGid,jdbcType=VARCHAR},
+      report_time = #{reportTime,jdbcType=TIMESTAMP},
+      report_type = #{reportType,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      customer_type = #{customerType,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      certificate_type = #{certificateType,jdbcType=VARCHAR},
+      certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      zone = #{zone,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=VARCHAR},
+      end_date = #{endDate,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      reserved_field1 = #{reservedField1,jdbcType=VARCHAR},
+      reserved_field2 = #{reservedField2,jdbcType=VARCHAR},
+      reserved_field3 = #{reservedField3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, gid, create_time, update_time, create_user, update_user, return_code, 
+    return_desc, return_data, trans_return_code, trans_return_desc, is_success, next_time, 
+    retry_num, status, batch_gid, report_time, report_type, org_code, customer_type, 
+    customer_name, certificate_type, certificate_no, reason, industry, zone, start_date, 
+    end_date, remark, reserved_field1, reserved_field2, reserved_field3
+    from reg_cq_abnormal_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, gid, create_time, update_time, create_user, update_user, return_code, 
+    return_desc, return_data, trans_return_code, trans_return_desc, is_success, next_time, 
+    retry_num, status, batch_gid, report_time, report_type, org_code, customer_type, 
+    customer_name, certificate_type, certificate_no, reason, industry, zone, start_date, 
+    end_date, remark, reserved_field1, reserved_field2, reserved_field3
+    from reg_cq_abnormal_info
+  </select>
+</mapper>

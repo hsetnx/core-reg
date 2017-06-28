@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.RegCqMsgLogMapper" >
+  <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.RegCqMsgLog" >
+    <id column="serial_id" property="serialId" jdbcType="BIGINT" />
+    <result column="msg_id" property="msgId" jdbcType="VARCHAR" />
+    <result column="msg_tag" property="msgTag" jdbcType="VARCHAR" />
+    <result column="msg_bod" property="msgBod" jdbcType="VARCHAR" />
+    <result column="creation_time" property="creationTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from reg_cq_msg_log
+    where serial_id = #{serialId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefinance.regulation.domain.RegCqMsgLog" >
+    insert into reg_cq_msg_log (serial_id, msg_id, msg_tag, 
+      msg_bod, creation_time)
+    values (#{serialId,jdbcType=BIGINT}, #{msgId,jdbcType=VARCHAR}, #{msgTag,jdbcType=VARCHAR}, 
+      #{msgBod,jdbcType=VARCHAR}, #{creationTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lefinance.regulation.domain.RegCqMsgLog" >
+    update reg_cq_msg_log
+    set msg_id = #{msgId,jdbcType=VARCHAR},
+      msg_tag = #{msgTag,jdbcType=VARCHAR},
+      msg_bod = #{msgBod,jdbcType=VARCHAR},
+      creation_time = #{creationTime,jdbcType=TIMESTAMP}
+    where serial_id = #{serialId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select serial_id, msg_id, msg_tag, msg_bod, creation_time
+    from reg_cq_msg_log
+    where serial_id = #{serialId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select serial_id, msg_id, msg_tag, msg_bod, creation_time
+    from reg_cq_msg_log
+  </select>
+</mapper>

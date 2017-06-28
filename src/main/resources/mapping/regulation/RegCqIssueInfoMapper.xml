@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.RegCqIssueInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.RegCqIssueInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gid" property="gid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="return_code" property="returnCode" jdbcType="VARCHAR" />
+    <result column="return_desc" property="returnDesc" jdbcType="VARCHAR" />
+    <result column="return_data" property="returnData" jdbcType="VARCHAR" />
+    <result column="trans_return_code" property="transReturnCode" jdbcType="CHAR" />
+    <result column="trans_return_desc" property="transReturnDesc" jdbcType="VARCHAR" />
+    <result column="is_success" property="isSuccess" jdbcType="BIT" />
+    <result column="next_time" property="nextTime" jdbcType="TIMESTAMP" />
+    <result column="retry_num" property="retryNum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="batch_gid" property="batchGid" jdbcType="VARCHAR" />
+    <result column="report_time" property="reportTime" jdbcType="TIMESTAMP" />
+    <result column="report_type" property="reportType" jdbcType="VARCHAR" />
+    <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="due_bill_no" property="dueBillNo" jdbcType="VARCHAR" />
+    <result column="customer_type" property="customerType" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="certificate_type" property="certificateType" jdbcType="VARCHAR" />
+    <result column="certificate_no" property="certificateNo" jdbcType="VARCHAR" />
+    <result column="dd_amt" property="ddAmt" jdbcType="DECIMAL" />
+    <result column="loan_cate" property="loanCate" jdbcType="VARCHAR" />
+    <result column="int_rate" property="intRate" jdbcType="DECIMAL" />
+    <result column="pri_plty_rate" property="priPltyRate" jdbcType="DECIMAL" />
+    <result column="rate_type" property="rateType" jdbcType="VARCHAR" />
+    <result column="sign_date" property="signDate" jdbcType="VARCHAR" />
+    <result column="dd_date" property="ddDate" jdbcType="VARCHAR" />
+    <result column="mature_date" property="matureDate" jdbcType="VARCHAR" />
+    <result column="ext_start_date" property="extStartDate" jdbcType="VARCHAR" />
+    <result column="ext_end_date" property="extEndDate" jdbcType="VARCHAR" />
+    <result column="ext_oustanding" property="extOustanding" jdbcType="DECIMAL" />
+    <result column="zone" property="zone" jdbcType="VARCHAR" />
+    <result column="guar_type" property="guarType" jdbcType="VARCHAR" />
+    <result column="term" property="term" jdbcType="VARCHAR" />
+    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
+    <result column="loan_object" property="loanObject" jdbcType="VARCHAR" />
+    <result column="loan_object_size" property="loanObjectSize" jdbcType="VARCHAR" />
+    <result column="rate_calc_mode" property="rateCalcMode" jdbcType="VARCHAR" />
+    <result column="repay_mode" property="repayMode" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="risk_level" property="riskLevel" jdbcType="VARCHAR" />
+    <result column="issue_status" property="issueStatus" jdbcType="VARCHAR" />
+    <result column="fair_amt" property="fairAmt" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="reserved_field1" property="reservedField1" jdbcType="VARCHAR" />
+    <result column="reserved_field2" property="reservedField2" jdbcType="VARCHAR" />
+    <result column="reserved_field3" property="reservedField3" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reg_cq_issue_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefinance.regulation.domain.RegCqIssueInfo" >
+    insert into reg_cq_issue_info (id, gid, create_time, 
+      update_time, create_user, update_user, 
+      return_code, return_desc, return_data, 
+      trans_return_code, trans_return_desc, is_success, 
+      next_time, retry_num, status, 
+      batch_gid, report_time, report_type, 
+      org_code, contract_no, due_bill_no, 
+      customer_type, customer_name, certificate_type, 
+      certificate_no, dd_amt, loan_cate, 
+      int_rate, pri_plty_rate, rate_type, 
+      sign_date, dd_date, mature_date, 
+      ext_start_date, ext_end_date, ext_oustanding, 
+      zone, guar_type, term, 
+      purpose, loan_object, loan_object_size, 
+      rate_calc_mode, repay_mode, industry, 
+      risk_level, issue_status, fair_amt, 
+      remark, reserved_field1, reserved_field2, 
+      reserved_field3)
+    values (#{id,jdbcType=INTEGER}, #{gid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{returnCode,jdbcType=VARCHAR}, #{returnDesc,jdbcType=VARCHAR}, #{returnData,jdbcType=VARCHAR}, 
+      #{transReturnCode,jdbcType=CHAR}, #{transReturnDesc,jdbcType=VARCHAR}, #{isSuccess,jdbcType=BIT}, 
+      #{nextTime,jdbcType=TIMESTAMP}, #{retryNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{batchGid,jdbcType=VARCHAR}, #{reportTime,jdbcType=TIMESTAMP}, #{reportType,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{contractNo,jdbcType=VARCHAR}, #{dueBillNo,jdbcType=VARCHAR}, 
+      #{customerType,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{certificateType,jdbcType=VARCHAR}, 
+      #{certificateNo,jdbcType=VARCHAR}, #{ddAmt,jdbcType=DECIMAL}, #{loanCate,jdbcType=VARCHAR}, 
+      #{intRate,jdbcType=DECIMAL}, #{priPltyRate,jdbcType=DECIMAL}, #{rateType,jdbcType=VARCHAR}, 
+      #{signDate,jdbcType=VARCHAR}, #{ddDate,jdbcType=VARCHAR}, #{matureDate,jdbcType=VARCHAR}, 
+      #{extStartDate,jdbcType=VARCHAR}, #{extEndDate,jdbcType=VARCHAR}, #{extOustanding,jdbcType=DECIMAL}, 
+      #{zone,jdbcType=VARCHAR}, #{guarType,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR}, 
+      #{purpose,jdbcType=VARCHAR}, #{loanObject,jdbcType=VARCHAR}, #{loanObjectSize,jdbcType=VARCHAR}, 
+      #{rateCalcMode,jdbcType=VARCHAR}, #{repayMode,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{riskLevel,jdbcType=VARCHAR}, #{issueStatus,jdbcType=VARCHAR}, #{fairAmt,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{reservedField1,jdbcType=VARCHAR}, #{reservedField2,jdbcType=VARCHAR}, 
+      #{reservedField3,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lefinance.regulation.domain.RegCqIssueInfo" >
+    update reg_cq_issue_info
+    set gid = #{gid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      return_code = #{returnCode,jdbcType=VARCHAR},
+      return_desc = #{returnDesc,jdbcType=VARCHAR},
+      return_data = #{returnData,jdbcType=VARCHAR},
+      trans_return_code = #{transReturnCode,jdbcType=CHAR},
+      trans_return_desc = #{transReturnDesc,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=BIT},
+      next_time = #{nextTime,jdbcType=TIMESTAMP},
+      retry_num = #{retryNum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      batch_gid = #{batchGid,jdbcType=VARCHAR},
+      report_time = #{reportTime,jdbcType=TIMESTAMP},
+      report_type = #{reportType,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      due_bill_no = #{dueBillNo,jdbcType=VARCHAR},
+      customer_type = #{customerType,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      certificate_type = #{certificateType,jdbcType=VARCHAR},
+      certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      dd_amt = #{ddAmt,jdbcType=DECIMAL},
+      loan_cate = #{loanCate,jdbcType=VARCHAR},
+      int_rate = #{intRate,jdbcType=DECIMAL},
+      pri_plty_rate = #{priPltyRate,jdbcType=DECIMAL},
+      rate_type = #{rateType,jdbcType=VARCHAR},
+      sign_date = #{signDate,jdbcType=VARCHAR},
+      dd_date = #{ddDate,jdbcType=VARCHAR},
+      mature_date = #{matureDate,jdbcType=VARCHAR},
+      ext_start_date = #{extStartDate,jdbcType=VARCHAR},
+      ext_end_date = #{extEndDate,jdbcType=VARCHAR},
+      ext_oustanding = #{extOustanding,jdbcType=DECIMAL},
+      zone = #{zone,jdbcType=VARCHAR},
+      guar_type = #{guarType,jdbcType=VARCHAR},
+      term = #{term,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      loan_object = #{loanObject,jdbcType=VARCHAR},
+      loan_object_size = #{loanObjectSize,jdbcType=VARCHAR},
+      rate_calc_mode = #{rateCalcMode,jdbcType=VARCHAR},
+      repay_mode = #{repayMode,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      risk_level = #{riskLevel,jdbcType=VARCHAR},
+      issue_status = #{issueStatus,jdbcType=VARCHAR},
+      fair_amt = #{fairAmt,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      reserved_field1 = #{reservedField1,jdbcType=VARCHAR},
+      reserved_field2 = #{reservedField2,jdbcType=VARCHAR},
+      reserved_field3 = #{reservedField3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, gid, create_time, update_time, create_user, update_user, return_code, 
+    return_desc, return_data, trans_return_code, trans_return_desc, is_success, next_time, 
+    retry_num, status, batch_gid, report_time, report_type, org_code, contract_no, due_bill_no, 
+    customer_type, customer_name, certificate_type, certificate_no, dd_amt, loan_cate, 
+    int_rate, pri_plty_rate, rate_type, sign_date, dd_date, mature_date, ext_start_date, 
+    ext_end_date, ext_oustanding, zone, guar_type, term, purpose, loan_object, loan_object_size, 
+    rate_calc_mode, repay_mode, industry, risk_level, issue_status, fair_amt, remark, 
+    reserved_field1, reserved_field2, reserved_field3
+    from reg_cq_issue_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, gid, create_time, update_time, create_user, update_user, return_code, 
+    return_desc, return_data, trans_return_code, trans_return_desc, is_success, next_time, 
+    retry_num, status, batch_gid, report_time, report_type, org_code, contract_no, due_bill_no, 
+    customer_type, customer_name, certificate_type, certificate_no, dd_amt, loan_cate, 
+    int_rate, pri_plty_rate, rate_type, sign_date, dd_date, mature_date, ext_start_date, 
+    ext_end_date, ext_oustanding, zone, guar_type, term, purpose, loan_object, loan_object_size, 
+    rate_calc_mode, repay_mode, industry, risk_level, issue_status, fair_amt, remark, 
+    reserved_field1, reserved_field2, reserved_field3
+    from reg_cq_issue_info
+  </select>
+</mapper>

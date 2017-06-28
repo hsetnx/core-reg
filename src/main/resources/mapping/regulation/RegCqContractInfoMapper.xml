@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.RegCqContractInfoMapper">
+    <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.RegCqContractInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gid" property="gid" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/>
+        <result column="return_desc" property="returnDesc" jdbcType="VARCHAR"/>
+        <result column="return_data" property="returnData" jdbcType="VARCHAR"/>
+        <result column="trans_return_code" property="transReturnCode" jdbcType="CHAR"/>
+        <result column="trans_return_desc" property="transReturnDesc" jdbcType="VARCHAR"/>
+        <result column="is_success" property="isSuccess" jdbcType="BIT"/>
+        <result column="next_time" property="nextTime" jdbcType="TIMESTAMP"/>
+        <result column="retry_num" property="retryNum" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="batch_gid" property="batchGid" jdbcType="VARCHAR"/>
+        <result column="report_time" property="reportTime" jdbcType="TIMESTAMP"/>
+        <result column="report_type" property="reportType" jdbcType="VARCHAR"/>
+        <result column="org_code" property="orgCode" jdbcType="VARCHAR"/>
+        <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+        <result column="loan_cate" property="loanCate" jdbcType="VARCHAR"/>
+        <result column="contract_name" property="contractName" jdbcType="VARCHAR"/>
+        <result column="customer_type" property="customerType" jdbcType="VARCHAR"/>
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR"/>
+        <result column="certificate_type" property="certificateType" jdbcType="VARCHAR"/>
+        <result column="certificate_no" property="certificateNo" jdbcType="VARCHAR"/>
+        <result column="linkman" property="linkman" jdbcType="VARCHAR"/>
+        <result column="telephone" property="telephone" jdbcType="VARCHAR"/>
+        <result column="loan_object" property="loanObject" jdbcType="VARCHAR"/>
+        <result column="loan_object_size" property="loanObjectSize" jdbcType="VARCHAR"/>
+        <result column="contract_sign_date" property="contractSignDate" jdbcType="VARCHAR"/>
+        <result column="contract_begin_date" property="contractBeginDate" jdbcType="VARCHAR"/>
+        <result column="contract_end_date" property="contractEndDate" jdbcType="VARCHAR"/>
+        <result column="contract_amount" property="contractAmount" jdbcType="DECIMAL"/>
+        <result column="outstanding" property="outstanding" jdbcType="DECIMAL"/>
+        <result column="guar_type" property="guarType" jdbcType="VARCHAR"/>
+        <result column="ccy" property="ccy" jdbcType="VARCHAR"/>
+        <result column="is_real_quota_loan" property="isRealQuotaLoan" jdbcType="VARCHAR"/>
+        <result column="real_quota_no" property="realQuotaNo" jdbcType="VARCHAR"/>
+        <result column="int_rate" property="intRate" jdbcType="DECIMAL"/>
+        <result column="pri_plty_rate" property="priPltyRate" jdbcType="DECIMAL"/>
+        <result column="contract_status" property="contractStatus" jdbcType="VARCHAR"/>
+        <result column="relation_manager" property="relationManager" jdbcType="VARCHAR"/>
+        <result column="dispute_scheme" property="disputeScheme" jdbcType="VARCHAR"/>
+        <result column="con_customer_type" property="conCustomerType" jdbcType="VARCHAR"/>
+        <result column="con_customer_name" property="conCustomerName" jdbcType="VARCHAR"/>
+        <result column="con_certificate_type" property="conCertificateType" jdbcType="VARCHAR"/>
+        <result column="con_certificate_no" property="conCertificateNo" jdbcType="VARCHAR"/>
+        <result column="con_jurisitc" property="conJurisitc" jdbcType="VARCHAR"/>
+        <result column="con_telephone" property="conTelephone" jdbcType="VARCHAR"/>
+        <result column="con_locus" property="conLocus" jdbcType="VARCHAR"/>
+        <result column="con_postalcode" property="conPostalcode" jdbcType="VARCHAR"/>
+        <result column="con_fincal_org" property="conFincalOrg" jdbcType="VARCHAR"/>
+        <result column="con_account_no" property="conAccountNo" jdbcType="VARCHAR"/>
+        <result column="ass_customer_name" property="assCustomerName" jdbcType="VARCHAR"/>
+        <result column="ass_juristic" property="assJuristic" jdbcType="VARCHAR"/>
+        <result column="ass_telephone" property="assTelephone" jdbcType="VARCHAR"/>
+        <result column="ass_locus" property="assLocus" jdbcType="VARCHAR"/>
+        <result column="ass_postalcode" property="assPostalcode" jdbcType="VARCHAR"/>
+        <result column="con_fee" property="conFee" jdbcType="DECIMAL"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="reserved_field1" property="reservedField1" jdbcType="VARCHAR"/>
+        <result column="reserved_field2" property="reservedField2" jdbcType="VARCHAR"/>
+        <result column="reserved_field3" property="reservedField3" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, gid, create_time, update_time, create_user, update_user, return_code, return_desc,
+        return_data, trans_return_code, trans_return_desc, is_success, next_time, retry_num,
+        status, batch_gid, report_time, report_type, org_code, contract_no, loan_cate, contract_name,
+        customer_type, customer_name, certificate_type, certificate_no, linkman, telephone,
+        loan_object, loan_object_size, contract_sign_date, contract_begin_date, contract_end_date,
+        contract_amount, outstanding, guar_type, ccy, is_real_quota_loan, real_quota_no,
+        int_rate, pri_plty_rate, contract_status, relation_manager, dispute_scheme, con_customer_type,
+        con_customer_name, con_certificate_type, con_certificate_no, con_jurisitc, con_telephone,
+        con_locus, con_postalcode, con_fincal_org, con_account_no, ass_customer_name, ass_juristic,
+        ass_telephone, ass_locus, ass_postalcode, con_fee, remark, reserved_field1, reserved_field2,
+        reserved_field3
+    </sql>
+
+    <select id="selectBatchForUpload" parameterType="com.lefinance.regulation.domain.RegCqContractInfo"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from reg_cq_contract_info
+        where is_success = #{isSuccess,jdbcType=BIT}
+        and status=#{status,jdbcType=INTEGER}
+        and retry_num <![CDATA[  <  ]]> #{retryNum,jdbcType=INTEGER}
+        limit 100
+    </select>
+
+    <select id="selectByBatchGid" parameterType="com.lefinance.regulation.domain.RegCqContractInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from reg_cq_contract_info
+        where batch_gid = #{batchGid,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateByBatchGid" parameterType="com.lefinance.regulation.domain.RegCqContractInfo">
+        update reg_cq_contract_info
+        set update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_user = #{updateUser,jdbcType=VARCHAR},
+        status = #{status,jdbcType=INTEGER}
+        where batch_gid = #{batchGid,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reg_cq_contract_info
+    where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.lefinance.regulation.domain.RegCqContractInfo">
+    insert into reg_cq_contract_info (id, gid, create_time, 
+      update_time, create_user, update_user, 
+      return_code, return_desc, return_data, 
+      trans_return_code, trans_return_desc, is_success, 
+      next_time, retry_num, status, 
+      batch_gid, report_time, report_type, 
+      org_code, contract_no, loan_cate, 
+      contract_name, customer_type, customer_name, 
+      certificate_type, certificate_no, linkman, 
+      telephone, loan_object, loan_object_size, 
+      contract_sign_date, contract_begin_date, contract_end_date, 
+      contract_amount, outstanding, guar_type, 
+      ccy, is_real_quota_loan, real_quota_no, 
+      int_rate, pri_plty_rate, contract_status, 
+      relation_manager, dispute_scheme, con_customer_type, 
+      con_customer_name, con_certificate_type, con_certificate_no, 
+      con_jurisitc, con_telephone, con_locus, 
+      con_postalcode, con_fincal_org, con_account_no, 
+      ass_customer_name, ass_juristic, ass_telephone, 
+      ass_locus, ass_postalcode, con_fee, 
+      remark, reserved_field1, reserved_field2, 
+      reserved_field3)
+    values (#{id,jdbcType=INTEGER}, #{gid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{returnCode,jdbcType=VARCHAR}, #{returnDesc,jdbcType=VARCHAR}, #{returnData,jdbcType=VARCHAR}, 
+      #{transReturnCode,jdbcType=CHAR}, #{transReturnDesc,jdbcType=VARCHAR}, #{isSuccess,jdbcType=BIT}, 
+      #{nextTime,jdbcType=TIMESTAMP}, #{retryNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{batchGid,jdbcType=VARCHAR}, #{reportTime,jdbcType=TIMESTAMP}, #{reportType,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{contractNo,jdbcType=VARCHAR}, #{loanCate,jdbcType=VARCHAR}, 
+      #{contractName,jdbcType=VARCHAR}, #{customerType,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{certificateType,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{loanObject,jdbcType=VARCHAR}, #{loanObjectSize,jdbcType=VARCHAR}, 
+      #{contractSignDate,jdbcType=VARCHAR}, #{contractBeginDate,jdbcType=VARCHAR}, #{contractEndDate,jdbcType=VARCHAR}, 
+      #{contractAmount,jdbcType=DECIMAL}, #{outstanding,jdbcType=DECIMAL}, #{guarType,jdbcType=VARCHAR}, 
+      #{ccy,jdbcType=VARCHAR}, #{isRealQuotaLoan,jdbcType=VARCHAR}, #{realQuotaNo,jdbcType=VARCHAR}, 
+      #{intRate,jdbcType=DECIMAL}, #{priPltyRate,jdbcType=DECIMAL}, #{contractStatus,jdbcType=VARCHAR}, 
+      #{relationManager,jdbcType=VARCHAR}, #{disputeScheme,jdbcType=VARCHAR}, #{conCustomerType,jdbcType=VARCHAR}, 
+      #{conCustomerName,jdbcType=VARCHAR}, #{conCertificateType,jdbcType=VARCHAR}, #{conCertificateNo,jdbcType=VARCHAR}, 
+      #{conJurisitc,jdbcType=VARCHAR}, #{conTelephone,jdbcType=VARCHAR}, #{conLocus,jdbcType=VARCHAR}, 
+      #{conPostalcode,jdbcType=VARCHAR}, #{conFincalOrg,jdbcType=VARCHAR}, #{conAccountNo,jdbcType=VARCHAR}, 
+      #{assCustomerName,jdbcType=VARCHAR}, #{assJuristic,jdbcType=VARCHAR}, #{assTelephone,jdbcType=VARCHAR}, 
+      #{assLocus,jdbcType=VARCHAR}, #{assPostalcode,jdbcType=VARCHAR}, #{conFee,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{reservedField1,jdbcType=VARCHAR}, #{reservedField2,jdbcType=VARCHAR}, 
+      #{reservedField3,jdbcType=VARCHAR})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.lefinance.regulation.domain.RegCqContractInfo">
+    update reg_cq_contract_info
+    set gid = #{gid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      return_code = #{returnCode,jdbcType=VARCHAR},
+      return_desc = #{returnDesc,jdbcType=VARCHAR},
+      return_data = #{returnData,jdbcType=VARCHAR},
+      trans_return_code = #{transReturnCode,jdbcType=CHAR},
+      trans_return_desc = #{transReturnDesc,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=BIT},
+      next_time = #{nextTime,jdbcType=TIMESTAMP},
+      retry_num = #{retryNum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      batch_gid = #{batchGid,jdbcType=VARCHAR},
+      report_time = #{reportTime,jdbcType=TIMESTAMP},
+      report_type = #{reportType,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      loan_cate = #{loanCate,jdbcType=VARCHAR},
+      contract_name = #{contractName,jdbcType=VARCHAR},
+      customer_type = #{customerType,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      certificate_type = #{certificateType,jdbcType=VARCHAR},
+      certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      loan_object = #{loanObject,jdbcType=VARCHAR},
+      loan_object_size = #{loanObjectSize,jdbcType=VARCHAR},
+      contract_sign_date = #{contractSignDate,jdbcType=VARCHAR},
+      contract_begin_date = #{contractBeginDate,jdbcType=VARCHAR},
+      contract_end_date = #{contractEndDate,jdbcType=VARCHAR},
+      contract_amount = #{contractAmount,jdbcType=DECIMAL},
+      outstanding = #{outstanding,jdbcType=DECIMAL},
+      guar_type = #{guarType,jdbcType=VARCHAR},
+      ccy = #{ccy,jdbcType=VARCHAR},
+      is_real_quota_loan = #{isRealQuotaLoan,jdbcType=VARCHAR},
+      real_quota_no = #{realQuotaNo,jdbcType=VARCHAR},
+      int_rate = #{intRate,jdbcType=DECIMAL},
+      pri_plty_rate = #{priPltyRate,jdbcType=DECIMAL},
+      contract_status = #{contractStatus,jdbcType=VARCHAR},
+      relation_manager = #{relationManager,jdbcType=VARCHAR},
+      dispute_scheme = #{disputeScheme,jdbcType=VARCHAR},
+      con_customer_type = #{conCustomerType,jdbcType=VARCHAR},
+      con_customer_name = #{conCustomerName,jdbcType=VARCHAR},
+      con_certificate_type = #{conCertificateType,jdbcType=VARCHAR},
+      con_certificate_no = #{conCertificateNo,jdbcType=VARCHAR},
+      con_jurisitc = #{conJurisitc,jdbcType=VARCHAR},
+      con_telephone = #{conTelephone,jdbcType=VARCHAR},
+      con_locus = #{conLocus,jdbcType=VARCHAR},
+      con_postalcode = #{conPostalcode,jdbcType=VARCHAR},
+      con_fincal_org = #{conFincalOrg,jdbcType=VARCHAR},
+      con_account_no = #{conAccountNo,jdbcType=VARCHAR},
+      ass_customer_name = #{assCustomerName,jdbcType=VARCHAR},
+      ass_juristic = #{assJuristic,jdbcType=VARCHAR},
+      ass_telephone = #{assTelephone,jdbcType=VARCHAR},
+      ass_locus = #{assLocus,jdbcType=VARCHAR},
+      ass_postalcode = #{assPostalcode,jdbcType=VARCHAR},
+      con_fee = #{conFee,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      reserved_field1 = #{reservedField1,jdbcType=VARCHAR},
+      reserved_field2 = #{reservedField2,jdbcType=VARCHAR},
+      reserved_field3 = #{reservedField3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, gid, create_time, update_time, create_user, update_user, return_code, 
+    return_desc, return_data, trans_return_code, trans_return_desc, is_success, next_time, 
+    retry_num, status, batch_gid, report_time, report_type, org_code, contract_no, loan_cate, 
+    contract_name, customer_type, customer_name, certificate_type, certificate_no, linkman, 
+    telephone, loan_object, loan_object_size, contract_sign_date, contract_begin_date, 
+    contract_end_date, contract_amount, outstanding, guar_type, ccy, is_real_quota_loan, 
+    real_quota_no, int_rate, pri_plty_rate, contract_status, relation_manager, dispute_scheme, 
+    con_customer_type, con_customer_name, con_certificate_type, con_certificate_no, con_jurisitc, 
+    con_telephone, con_locus, con_postalcode, con_fincal_org, con_account_no, ass_customer_name, 
+    ass_juristic, ass_telephone, ass_locus, ass_postalcode, con_fee, remark, reserved_field1, 
+    reserved_field2, reserved_field3
+    from reg_cq_contract_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, gid, create_time, update_time, create_user, update_user, return_code, 
+    return_desc, return_data, trans_return_code, trans_return_desc, is_success, next_time, 
+    retry_num, status, batch_gid, report_time, report_type, org_code, contract_no, loan_cate, 
+    contract_name, customer_type, customer_name, certificate_type, certificate_no, linkman, 
+    telephone, loan_object, loan_object_size, contract_sign_date, contract_begin_date, 
+    contract_end_date, contract_amount, outstanding, guar_type, ccy, is_real_quota_loan, 
+    real_quota_no, int_rate, pri_plty_rate, contract_status, relation_manager, dispute_scheme, 
+    con_customer_type, con_customer_name, con_certificate_type, con_certificate_no, con_jurisitc, 
+    con_telephone, con_locus, con_postalcode, con_fincal_org, con_account_no, ass_customer_name, 
+    ass_juristic, ass_telephone, ass_locus, ass_postalcode, con_fee, remark, reserved_field1, 
+    reserved_field2, reserved_field3
+    from reg_cq_contract_info
+  </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefinance.regulation.domain.RegCqContractInfo">
+        update reg_cq_contract_info
+        <set>
+            <if test="gid != null">
+                gid = #{gid,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="returnCode != null">
+                return_code = #{returnCode,jdbcType=VARCHAR},
+            </if>
+            <if test="returnDesc != null">
+                return_desc = #{returnDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="returnData != null">
+                return_data = #{returnData,jdbcType=VARCHAR},
+            </if>
+            <if test="transReturnCode != null">
+                trans_return_code = #{transReturnCode,jdbcType=CHAR},
+            </if>
+            <if test="transReturnDesc != null">
+                trans_return_desc = #{transReturnDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isSuccess != null">
+                is_success = #{isSuccess,jdbcType=BIT},
+            </if>
+            <if test="nextTime != null">
+                next_time = #{nextTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="retryNum != null">
+                retry_num = #{retryNum,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="batchGid != null">
+                batch_gid = #{batchGid,jdbcType=VARCHAR},
+            </if>
+            <if test="reportTime != null">
+                report_time = #{reportTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reportType != null">
+                report_type = #{reportType,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCode != null">
+                org_code = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNo != null">
+                contract_no = #{contractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="loanCate != null">
+                loan_cate = #{loanCate,jdbcType=VARCHAR},
+            </if>
+            <if test="contractName != null">
+                contract_name = #{contractName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerType != null">
+                customer_type = #{customerType,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateType != null">
+                certificate_type = #{certificateType,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateNo != null">
+                certificate_no = #{certificateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="linkman != null">
+                linkman = #{linkman,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="loanObject != null">
+                loan_object = #{loanObject,jdbcType=VARCHAR},
+            </if>
+            <if test="loanObjectSize != null">
+                loan_object_size = #{loanObjectSize,jdbcType=VARCHAR},
+            </if>
+            <if test="contractSignDate != null">
+                contract_sign_date = #{contractSignDate,jdbcType=VARCHAR},
+            </if>
+            <if test="contractBeginDate != null">
+                contract_begin_date = #{contractBeginDate,jdbcType=VARCHAR},
+            </if>
+            <if test="contractEndDate != null">
+                contract_end_date = #{contractEndDate,jdbcType=VARCHAR},
+            </if>
+            <if test="contractAmount != null">
+                contract_amount = #{contractAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="outstanding != null">
+                outstanding = #{outstanding,jdbcType=DECIMAL},
+            </if>
+            <if test="guarType != null">
+                guar_type = #{guarType,jdbcType=VARCHAR},
+            </if>
+            <if test="ccy != null">
+                ccy = #{ccy,jdbcType=VARCHAR},
+            </if>
+            <if test="isRealQuotaLoan != null">
+                is_real_quota_loan = #{isRealQuotaLoan,jdbcType=VARCHAR},
+            </if>
+            <if test="realQuotaNo != null">
+                real_quota_no = #{realQuotaNo,jdbcType=VARCHAR},
+            </if>
+            <if test="intRate != null">
+                int_rate = #{intRate,jdbcType=DECIMAL},
+            </if>
+            <if test="priPltyRate != null">
+                pri_plty_rate = #{priPltyRate,jdbcType=DECIMAL},
+            </if>
+            <if test="contractStatus != null">
+                contract_status = #{contractStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="relationManager != null">
+                relation_manager = #{relationManager,jdbcType=VARCHAR},
+            </if>
+            <if test="disputeScheme != null">
+                dispute_scheme = #{disputeScheme,jdbcType=VARCHAR},
+            </if>
+            <if test="conCustomerType != null">
+                con_customer_type = #{conCustomerType,jdbcType=VARCHAR},
+            </if>
+            <if test="conCustomerName != null">
+                con_customer_name = #{conCustomerName,jdbcType=VARCHAR},
+            </if>
+            <if test="conCertificateType != null">
+                con_certificate_type = #{conCertificateType,jdbcType=VARCHAR},
+            </if>
+            <if test="conCertificateNo != null">
+                con_certificate_no = #{conCertificateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="conJurisitc != null">
+                con_jurisitc = #{conJurisitc,jdbcType=VARCHAR},
+            </if>
+            <if test="conTelephone != null">
+                con_telephone = #{conTelephone,jdbcType=VARCHAR},
+            </if>
+            <if test="conLocus != null">
+                con_locus = #{conLocus,jdbcType=VARCHAR},
+            </if>
+            <if test="conPostalcode != null">
+                con_postalcode = #{conPostalcode,jdbcType=VARCHAR},
+            </if>
+            <if test="conFincalOrg != null">
+                con_fincal_org = #{conFincalOrg,jdbcType=VARCHAR},
+            </if>
+            <if test="conAccountNo != null">
+                con_account_no = #{conAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="assCustomerName != null">
+                ass_customer_name = #{assCustomerName,jdbcType=VARCHAR},
+            </if>
+            <if test="assJuristic != null">
+                ass_juristic = #{assJuristic,jdbcType=VARCHAR},
+            </if>
+            <if test="assTelephone != null">
+                ass_telephone = #{assTelephone,jdbcType=VARCHAR},
+            </if>
+            <if test="assLocus != null">
+                ass_locus = #{assLocus,jdbcType=VARCHAR},
+            </if>
+            <if test="assPostalcode != null">
+                ass_postalcode = #{assPostalcode,jdbcType=VARCHAR},
+            </if>
+            <if test="conFee != null">
+                con_fee = #{conFee,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="reservedField1 != null">
+                reserved_field1 = #{reservedField1,jdbcType=VARCHAR},
+            </if>
+            <if test="reservedField2 != null">
+                reserved_field2 = #{reservedField2,jdbcType=VARCHAR},
+            </if>
+            <if test="reservedField3 != null">
+                reserved_field3 = #{reservedField3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

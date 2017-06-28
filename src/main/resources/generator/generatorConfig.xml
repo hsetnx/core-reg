@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 配置文件 -->
+    <properties resource="application.properties"/>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <!-- 去掉注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- jdbc -->
+        <jdbcConnection driverClass="${druid.driver-class}" connectionURL="${druid.url}"
+                        userId="${druid.username}" password="${druid.password}">
+        </jdbcConnection>
+        <!-- domain -->
+        <javaModelGenerator targetPackage="com.lefinance.regulation.domain" targetProject="src/main/java"/>
+        <!-- xml -->
+        <sqlMapGenerator targetPackage="mapping.regulation" targetProject="src/main/resources"/>
+        <!-- dao -->
+        <javaClientGenerator targetPackage="com.lefinance.regulation.dao" targetProject="src/main/java" type="XMLMAPPER"/>
+        <table tableName="%">
+            <!--mysql 配置-->
+            <!--<generatedKey column="SERIAL_ID" sqlStatement="Mysql" identity="true"/>-->
+            <!--oracle 配置-->
+            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+        </table>
+    </context>
+</generatorConfiguration>

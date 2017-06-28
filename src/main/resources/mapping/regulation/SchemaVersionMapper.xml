@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.SchemaVersionMapper" >
+  <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.SchemaVersion" >
+    <id column="installed_rank" property="installedRank" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="script" property="script" jdbcType="VARCHAR" />
+    <result column="checksum" property="checksum" jdbcType="INTEGER" />
+    <result column="installed_by" property="installedBy" jdbcType="VARCHAR" />
+    <result column="installed_on" property="installedOn" jdbcType="TIMESTAMP" />
+    <result column="execution_time" property="executionTime" jdbcType="INTEGER" />
+    <result column="success" property="success" jdbcType="BIT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from schema_version
+    where installed_rank = #{installedRank,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefinance.regulation.domain.SchemaVersion" >
+    insert into schema_version (installed_rank, version, description, 
+      type, script, checksum, 
+      installed_by, installed_on, execution_time, 
+      success)
+    values (#{installedRank,jdbcType=INTEGER}, #{version,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{script,jdbcType=VARCHAR}, #{checksum,jdbcType=INTEGER}, 
+      #{installedBy,jdbcType=VARCHAR}, #{installedOn,jdbcType=TIMESTAMP}, #{executionTime,jdbcType=INTEGER}, 
+      #{success,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lefinance.regulation.domain.SchemaVersion" >
+    update schema_version
+    set version = #{version,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      script = #{script,jdbcType=VARCHAR},
+      checksum = #{checksum,jdbcType=INTEGER},
+      installed_by = #{installedBy,jdbcType=VARCHAR},
+      installed_on = #{installedOn,jdbcType=TIMESTAMP},
+      execution_time = #{executionTime,jdbcType=INTEGER},
+      success = #{success,jdbcType=BIT}
+    where installed_rank = #{installedRank,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select installed_rank, version, description, type, script, checksum, installed_by, 
+    installed_on, execution_time, success
+    from schema_version
+    where installed_rank = #{installedRank,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select installed_rank, version, description, type, script, checksum, installed_by, 
+    installed_on, execution_time, success
+    from schema_version
+  </select>
+</mapper>

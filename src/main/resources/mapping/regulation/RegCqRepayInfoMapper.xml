@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.RegCqRepayInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.RegCqRepayInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gid" property="gid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="return_code" property="returnCode" jdbcType="VARCHAR" />
+    <result column="return_desc" property="returnDesc" jdbcType="VARCHAR" />
+    <result column="return_data" property="returnData" jdbcType="VARCHAR" />
+    <result column="trans_return_code" property="transReturnCode" jdbcType="CHAR" />
+    <result column="trans_return_desc" property="transReturnDesc" jdbcType="VARCHAR" />
+    <result column="is_success" property="isSuccess" jdbcType="BIT" />
+    <result column="next_time" property="nextTime" jdbcType="TIMESTAMP" />
+    <result column="retry_num" property="retryNum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="batch_gid" property="batchGid" jdbcType="VARCHAR" />
+    <result column="report_time" property="reportTime" jdbcType="TIMESTAMP" />
+    <result column="report_type" property="reportType" jdbcType="VARCHAR" />
+    <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="due_bill_no" property="dueBillNo" jdbcType="VARCHAR" />
+    <result column="repay_date" property="repayDate" jdbcType="VARCHAR" />
+    <result column="counter" property="counter" jdbcType="VARCHAR" />
+    <result column="customer_type" property="customerType" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="certificate_type" property="certificateType" jdbcType="VARCHAR" />
+    <result column="certificate_no" property="certificateNo" jdbcType="VARCHAR" />
+    <result column="gather_mode" property="gatherMode" jdbcType="VARCHAR" />
+    <result column="repay_pri_amt" property="repayPriAmt" jdbcType="DECIMAL" />
+    <result column="repay_int_amt" property="repayIntAmt" jdbcType="DECIMAL" />
+    <result column="start_date" property="startDate" jdbcType="VARCHAR" />
+    <result column="end_date" property="endDate" jdbcType="VARCHAR" />
+    <result column="receipt_type" property="receiptType" jdbcType="VARCHAR" />
+    <result column="delay_days" property="delayDays" jdbcType="VARCHAR" />
+    <result column="delay_amt" property="delayAmt" jdbcType="DECIMAL" />
+    <result column="delay_interest" property="delayInterest" jdbcType="DECIMAL" />
+    <result column="delay_fee" property="delayFee" jdbcType="DECIMAL" />
+    <result column="pri_plty_rate" property="priPltyRate" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="reserved_field1" property="reservedField1" jdbcType="VARCHAR" />
+    <result column="reserved_field2" property="reservedField2" jdbcType="VARCHAR" />
+    <result column="reserved_field3" property="reservedField3" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reg_cq_repay_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefinance.regulation.domain.RegCqRepayInfo" >
+    insert into reg_cq_repay_info (id, gid, create_time, 
+      update_time, create_user, update_user, 
+      return_code, return_desc, return_data, 
+      trans_return_code, trans_return_desc, is_success, 
+      next_time, retry_num, status, 
+      batch_gid, report_time, report_type, 
+      org_code, contract_no, due_bill_no, 
+      repay_date, counter, customer_type, 
+      customer_name, certificate_type, certificate_no, 
+      gather_mode, repay_pri_amt, repay_int_amt, 
+      start_date, end_date, receipt_type, 
+      delay_days, delay_amt, delay_interest, 
+      delay_fee, pri_plty_rate, remark, 
+      reserved_field1, reserved_field2, reserved_field3
+      )
+    values (#{id,jdbcType=INTEGER}, #{gid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{returnCode,jdbcType=VARCHAR}, #{returnDesc,jdbcType=VARCHAR}, #{returnData,jdbcType=VARCHAR}, 
+      #{transReturnCode,jdbcType=CHAR}, #{transReturnDesc,jdbcType=VARCHAR}, #{isSuccess,jdbcType=BIT}, 
+      #{nextTime,jdbcType=TIMESTAMP}, #{retryNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{batchGid,jdbcType=VARCHAR}, #{reportTime,jdbcType=TIMESTAMP}, #{reportType,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{contractNo,jdbcType=VARCHAR}, #{dueBillNo,jdbcType=VARCHAR}, 
+      #{repayDate,jdbcType=VARCHAR}, #{counter,jdbcType=VARCHAR}, #{customerType,jdbcType=VARCHAR}, 
+      #{customerName,jdbcType=VARCHAR}, #{certificateType,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, 
+      #{gatherMode,jdbcType=VARCHAR}, #{repayPriAmt,jdbcType=DECIMAL}, #{repayIntAmt,jdbcType=DECIMAL}, 
+      #{startDate,jdbcType=VARCHAR}, #{endDate,jdbcType=VARCHAR}, #{receiptType,jdbcType=VARCHAR}, 
+      #{delayDays,jdbcType=VARCHAR}, #{delayAmt,jdbcType=DECIMAL}, #{delayInterest,jdbcType=DECIMAL}, 
+      #{delayFee,jdbcType=DECIMAL}, #{priPltyRate,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{reservedField1,jdbcType=VARCHAR}, #{reservedField2,jdbcType=VARCHAR}, #{reservedField3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lefinance.regulation.domain.RegCqRepayInfo" >
+    update reg_cq_repay_info
+    set gid = #{gid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      return_code = #{returnCode,jdbcType=VARCHAR},
+      return_desc = #{returnDesc,jdbcType=VARCHAR},
+      return_data = #{returnData,jdbcType=VARCHAR},
+      trans_return_code = #{transReturnCode,jdbcType=CHAR},
+      trans_return_desc = #{transReturnDesc,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=BIT},
+      next_time = #{nextTime,jdbcType=TIMESTAMP},
+      retry_num = #{retryNum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      batch_gid = #{batchGid,jdbcType=VARCHAR},
+      report_time = #{reportTime,jdbcType=TIMESTAMP},
+      report_type = #{reportType,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      due_bill_no = #{dueBillNo,jdbcType=VARCHAR},
+      repay_date = #{repayDate,jdbcType=VARCHAR},
+      counter = #{counter,jdbcType=VARCHAR},
+      customer_type = #{customerType,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      certificate_type = #{certificateType,jdbcType=VARCHAR},
+      certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      gather_mode = #{gatherMode,jdbcType=VARCHAR},
+      repay_pri_amt = #{repayPriAmt,jdbcType=DECIMAL},
+      repay_int_amt = #{repayIntAmt,jdbcType=DECIMAL},
+      start_date = #{startDate,jdbcType=VARCHAR},
+      end_date = #{endDate,jdbcType=VARCHAR},
+      receipt_type = #{receiptType,jdbcType=VARCHAR},
+      delay_days = #{delayDays,jdbcType=VARCHAR},
+      delay_amt = #{delayAmt,jdbcType=DECIMAL},
+      delay_interest = #{delayInterest,jdbcType=DECIMAL},
+      delay_fee = #{delayFee,jdbcType=DECIMAL},
+      pri_plty_rate = #{priPltyRate,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      reserved_field1 = #{reservedField1,jdbcType=VARCHAR},
+      reserved_field2 = #{reservedField2,jdbcType=VARCHAR},
+      reserved_field3 = #{reservedField3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, gid, create_time, update_time, create_user, update_user, return_code, 
+    return_desc, return_data, trans_return_code, trans_return_desc, is_success, next_time, 
+    retry_num, status, batch_gid, report_time, report_type, org_code, contract_no, due_bill_no, 
+    repay_date, counter, customer_type, customer_name, certificate_type, certificate_no, 
+    gather_mode, repay_pri_amt, repay_int_amt, start_date, end_date, receipt_type, delay_days, 
+    delay_amt, delay_interest, delay_fee, pri_plty_rate, remark, reserved_field1, reserved_field2, 
+    reserved_field3
+    from reg_cq_repay_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, gid, create_time, update_time, create_user, update_user, return_code, 
+    return_desc, return_data, trans_return_code, trans_return_desc, is_success, next_time, 
+    retry_num, status, batch_gid, report_time, report_type, org_code, contract_no, due_bill_no, 
+    repay_date, counter, customer_type, customer_name, certificate_type, certificate_no, 
+    gather_mode, repay_pri_amt, repay_int_amt, start_date, end_date, receipt_type, delay_days, 
+    delay_amt, delay_interest, delay_fee, pri_plty_rate, remark, reserved_field1, reserved_field2, 
+    reserved_field3
+    from reg_cq_repay_info
+  </select>
+</mapper>

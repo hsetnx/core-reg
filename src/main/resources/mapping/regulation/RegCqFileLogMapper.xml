@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.RegCqFileLogMapper" >
+  <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.RegCqFileLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gid" property="gid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="batch_gid" property="batchGid" jdbcType="VARCHAR" />
+    <result column="seq_no" property="seqNo" jdbcType="VARCHAR" />
+    <result column="send_data" property="sendData" jdbcType="VARCHAR" />
+    <result column="return_code" property="returnCode" jdbcType="CHAR" />
+    <result column="return_desc" property="returnDesc" jdbcType="VARCHAR" />
+    <result column="return_data" property="returnData" jdbcType="VARCHAR" />
+    <result column="trans_return_code" property="transReturnCode" jdbcType="CHAR" />
+    <result column="trans_return_desc" property="transReturnDesc" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="is_success" property="isSuccess" jdbcType="BIT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reg_cq_file_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefinance.regulation.domain.RegCqFileLog" >
+    insert into reg_cq_file_log (id, gid, create_time, 
+      update_time, create_user, update_user, 
+      batch_gid, seq_no, send_data, 
+      return_code, return_desc, return_data, 
+      trans_return_code, trans_return_desc, remark, 
+      is_success)
+    values (#{id,jdbcType=INTEGER}, #{gid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{batchGid,jdbcType=VARCHAR}, #{seqNo,jdbcType=VARCHAR}, #{sendData,jdbcType=VARCHAR}, 
+      #{returnCode,jdbcType=CHAR}, #{returnDesc,jdbcType=VARCHAR}, #{returnData,jdbcType=VARCHAR}, 
+      #{transReturnCode,jdbcType=CHAR}, #{transReturnDesc,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{isSuccess,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lefinance.regulation.domain.RegCqFileLog" >
+    update reg_cq_file_log
+    set gid = #{gid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      batch_gid = #{batchGid,jdbcType=VARCHAR},
+      seq_no = #{seqNo,jdbcType=VARCHAR},
+      send_data = #{sendData,jdbcType=VARCHAR},
+      return_code = #{returnCode,jdbcType=CHAR},
+      return_desc = #{returnDesc,jdbcType=VARCHAR},
+      return_data = #{returnData,jdbcType=VARCHAR},
+      trans_return_code = #{transReturnCode,jdbcType=CHAR},
+      trans_return_desc = #{transReturnDesc,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, gid, create_time, update_time, create_user, update_user, batch_gid, seq_no, 
+    send_data, return_code, return_desc, return_data, trans_return_code, trans_return_desc, 
+    remark, is_success
+    from reg_cq_file_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, gid, create_time, update_time, create_user, update_user, batch_gid, seq_no, 
+    send_data, return_code, return_desc, return_data, trans_return_code, trans_return_desc, 
+    remark, is_success
+    from reg_cq_file_log
+  </select>
+</mapper>
