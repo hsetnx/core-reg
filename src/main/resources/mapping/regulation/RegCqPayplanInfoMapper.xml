@@ -34,6 +34,41 @@
     <result column="reserved_field2" property="reservedField2" jdbcType="VARCHAR" />
     <result column="reserved_field3" property="reservedField3" jdbcType="VARCHAR" />
   </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, gid, create_time, update_time, create_user, update_user, return_code, return_desc,
+    return_data, trans_return_code, trans_return_desc, is_success, next_time, retry_num,
+    status, batch_gid, report_time, report_type, org_code, contract_no, due_bill_no,
+    counter, repay_date, repay_pri_amt, repay_int_amt, start_date, end_date, remark,
+    reserved_field1, reserved_field2, reserved_field3
+  </sql>
+
+  <select id="selectBatchForUpload" parameterType="com.lefinance.regulation.domain.RegCqPayplanInfo"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from reg_cq_payplan_info
+    where is_success = #{isSuccess,jdbcType=BIT}
+    and status=#{status,jdbcType=INTEGER}
+    and retry_num <![CDATA[  <  ]]> #{retryNum,jdbcType=INTEGER}
+    limit 100
+  </select>
+
+  <update id="updateByBatchGid" parameterType="com.lefinance.regulation.domain.RegCqPayplanInfo">
+    update reg_cq_payplan_info
+    set update_time = #{updateTime,jdbcType=TIMESTAMP},
+    update_user = #{updateUser,jdbcType=VARCHAR},
+    status = #{status,jdbcType=INTEGER}
+    where batch_gid = #{batchGid,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByBatchGid" parameterType="com.lefinance.regulation.domain.RegCqPayplanInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from reg_cq_payplan_info
+    where batch_gid = #{batchGid,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from reg_cq_payplan_info
     where id = #{id,jdbcType=INTEGER}
@@ -113,4 +148,101 @@
     reserved_field1, reserved_field2, reserved_field3
     from reg_cq_payplan_info
   </select>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefinance.regulation.domain.RegCqPayplanInfo" >
+    update reg_cq_payplan_info
+    <set >
+      <if test="gid != null" >
+        gid = #{gid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCode != null" >
+        return_code = #{returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnDesc != null" >
+        return_desc = #{returnDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="returnData != null" >
+        return_data = #{returnData,jdbcType=VARCHAR},
+      </if>
+      <if test="transReturnCode != null" >
+        trans_return_code = #{transReturnCode,jdbcType=CHAR},
+      </if>
+      <if test="transReturnDesc != null" >
+        trans_return_desc = #{transReturnDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuccess != null" >
+        is_success = #{isSuccess,jdbcType=BIT},
+      </if>
+      <if test="nextTime != null" >
+        next_time = #{nextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retryNum != null" >
+        retry_num = #{retryNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="batchGid != null" >
+        batch_gid = #{batchGid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportTime != null" >
+        report_time = #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportType != null" >
+        report_type = #{reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dueBillNo != null" >
+        due_bill_no = #{dueBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="counter != null" >
+        counter = #{counter,jdbcType=VARCHAR},
+      </if>
+      <if test="repayDate != null" >
+        repay_date = #{repayDate,jdbcType=VARCHAR},
+      </if>
+      <if test="repayPriAmt != null" >
+        repay_pri_amt = #{repayPriAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="repayIntAmt != null" >
+        repay_int_amt = #{repayIntAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null" >
+        reserved_field1 = #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null" >
+        reserved_field2 = #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null" >
+        reserved_field3 = #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

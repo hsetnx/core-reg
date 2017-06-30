@@ -5,7 +5,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 /**
- * Created by chenyong6 on 2017/5/4.
+ * @Author: jingyan
+ * @Time: 2017/6/29 15:58
+ * @Describe: 共同借款人报文实体类
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CoCustomerInfo {

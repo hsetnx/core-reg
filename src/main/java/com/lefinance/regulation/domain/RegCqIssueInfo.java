@@ -108,6 +108,64 @@ public class RegCqIssueInfo {
 
     private String reservedField3;
 
+    @Override
+    public String toString() {
+        return "RegCqIssueInfo{" +
+                "id=" + id +
+                ", gid='" + gid + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", createUser='" + createUser + '\'' +
+                ", updateUser='" + updateUser + '\'' +
+                ", returnCode='" + returnCode + '\'' +
+                ", returnDesc='" + returnDesc + '\'' +
+                ", returnData='" + returnData + '\'' +
+                ", transReturnCode='" + transReturnCode + '\'' +
+                ", transReturnDesc='" + transReturnDesc + '\'' +
+                ", isSuccess=" + isSuccess +
+                ", nextTime=" + nextTime +
+                ", retryNum=" + retryNum +
+                ", status=" + status +
+                ", batchGid='" + batchGid + '\'' +
+                ", reportTime=" + reportTime +
+                ", reportType='" + reportType + '\'' +
+                ", orgCode='" + orgCode + '\'' +
+                ", contractNo='" + contractNo + '\'' +
+                ", dueBillNo='" + dueBillNo + '\'' +
+                ", customerType='" + customerType + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", certificateType='" + certificateType + '\'' +
+                ", certificateNo='" + certificateNo + '\'' +
+                ", ddAmt=" + ddAmt +
+                ", loanCate='" + loanCate + '\'' +
+                ", intRate=" + intRate +
+                ", priPltyRate=" + priPltyRate +
+                ", rateType='" + rateType + '\'' +
+                ", signDate='" + signDate + '\'' +
+                ", ddDate='" + ddDate + '\'' +
+                ", matureDate='" + matureDate + '\'' +
+                ", extStartDate='" + extStartDate + '\'' +
+                ", extEndDate='" + extEndDate + '\'' +
+                ", extOustanding=" + extOustanding +
+                ", zone='" + zone + '\'' +
+                ", guarType='" + guarType + '\'' +
+                ", term='" + term + '\'' +
+                ", purpose='" + purpose + '\'' +
+                ", loanObject='" + loanObject + '\'' +
+                ", loanObjectSize='" + loanObjectSize + '\'' +
+                ", rateCalcMode='" + rateCalcMode + '\'' +
+                ", repayMode='" + repayMode + '\'' +
+                ", industry='" + industry + '\'' +
+                ", riskLevel='" + riskLevel + '\'' +
+                ", issueStatus='" + issueStatus + '\'' +
+                ", fairAmt=" + fairAmt +
+                ", remark='" + remark + '\'' +
+                ", reservedField1='" + reservedField1 + '\'' +
+                ", reservedField2='" + reservedField2 + '\'' +
+                ", reservedField3='" + reservedField3 + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

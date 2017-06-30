@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by chenyong6 on 2017/4/25.
+ * @Author: jingyan
+ * @Time: 2017/6/29 15:58
+ * @Describe: 贷款合同报文实体类
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ContractInfo {

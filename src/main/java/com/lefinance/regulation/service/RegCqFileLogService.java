@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * @Author: jingyan
  * @Time: 2017/6/27 17:09
- * @Describe:
+ * @Describe: 报送记录
  */
 @Service
 public class RegCqFileLogService {

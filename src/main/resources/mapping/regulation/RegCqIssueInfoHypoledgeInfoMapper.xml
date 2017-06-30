@@ -10,6 +10,14 @@
     <result column="is_write_off" property="isWriteOff" jdbcType="VARCHAR" />
     <result column="write_off_date" property="writeOffDate" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <select id="selectByIssueInfoGid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, issue_info_gid, guar_contract_no, warrant_no, hypopledge_amount, is_write_off,
+    write_off_date
+    from reg_cq_issue_info_hypoledge_info
+    where issue_info_gid = #{issueInfoGid,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from reg_cq_issue_info_hypoledge_info
     where id = #{id,jdbcType=INTEGER}

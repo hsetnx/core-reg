@@ -129,11 +129,6 @@ public class RegulatoryContants {
         public static final String FAIL = "F";
     }
 
-    public static class RetryNums {
-        //默认最大重试次数
-        public static final int RETRYNUM = 3;
-    }
-
     /**
      * @Author: jingyan
      * @Time: 2017/6/27 16:58
@@ -147,8 +142,8 @@ public class RegulatoryContants {
         public static final Integer NOTIFYING = 5;
         public static final Integer NOTIFIED = 6;
         public static final Integer RESULT_QUERYING = 7;
-        public static final Integer REPORT_SUCCESS=8;
-        public static final Integer REPORT_FAIL=9;
+        public static final Integer REPORT_SUCCESS = 8;
+        public static final Integer REPORT_FAIL = 9;
     }
 
     /**
@@ -163,6 +158,18 @@ public class RegulatoryContants {
         public static final Integer REPORTING = 2;
         //上报成功
         public static final Integer REPORTED = 3;
+    }
+
+    /**
+     * @Author: jingyan
+     * @Time: 2017/6/28 18:27
+     * @Describe: 获取文件序列号，redis key
+     */
+    public static class FileSequence {
+        public static final String REDIS_CACHE_FILE_102_SEQUENCE = "REDIS_CACHE_FILE_102_";
+        public static final String REDIS_CACHE_FILE_103_SEQUENCE = "REDIS_CACHE_FILE_103_";
+        public static final String REDIS_CACHE_FILE_104_SEQUENCE = "REDIS_CACHE_FILE_104_";
+        public static final String REDIS_CACHE_FILE_105_SEQUENCE = "REDIS_CACHE_FILE_105_";
     }
 
     public static class TransCode {

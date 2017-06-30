@@ -6,7 +6,9 @@ import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 /**
- * Created by chenyong6 on 2017/4/26.
+ * @Author: jingyan
+ * @Time: 2017/6/29 15:59
+ * @Describe: 报文头
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PTLN104RequestBodyEntity {

@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 /**
  * @Author: jingyan
  * @Time: 2017/3/17 11:28
- * @Describe:
+ * @Describe: 创建序列号
  */
 @Service
 public class AcctCreateKeyService {
 
-    private static Logger logger = LoggerFactory.getLogger(AcctCreateKeyService.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     //流水号key值时间后缀格式化标准
     public static final String DATE_FROMAT = "yyyyMM";
     public static final String DATE_FROMAT_DD = "yyyyMMdd";
@@ -24,19 +24,15 @@ public class AcctCreateKeyService {
     public static final int HOLD_TIME_WEEK = 604800;   //7天
     public static final int HOLD_TIME_MONTH = 3456000; //40天
 
-
-    public static final String REDIS_CACHE_FILE_SEQUENCE = "REDIS_CACHE_FILE_SEQUENCE";
-
-
     /**
      * @Author: jingyan
      * @Time: 2017/4/12 18:02
-     * @Describe: 获取合同文件序列号
+     * @Describe: 获取上报文件序列号
      */
-    public String createContractSeq() {
+    public String createFileSequence(String fileSequenceKey) {
         try {
-            DispersedLock dispersedLock = RegisterUtil.getDispersedLock(REDIS_CACHE_FILE_SEQUENCE);
-            Object object = dispersedLock.wrap(new CreatePrimaryKey(REDIS_CACHE_FILE_SEQUENCE, PubMethod.getDateStr(DATE_FROMAT_DD), HOLD_TIME_WEEK, 2), null, null);
+            DispersedLock dispersedLock = RegisterUtil.getDispersedLock(fileSequenceKey);
+            Object object = dispersedLock.wrap(new CreatePrimaryKey(fileSequenceKey, PubMethod.getDateStr(DATE_FROMAT_DD), HOLD_TIME_WEEK, 2), null, null);
             if (PubMethod.isEmpty(object)) {
                 logger.info("获取REDIS_CACHE_FILE_SEQUENCE序列号失败...");
                 throw new RuntimeException("获取REDIS_CACHE_FILE_SEQUENCE序列号失败");

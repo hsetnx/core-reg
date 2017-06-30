@@ -24,7 +24,9 @@
         <sqlMapGenerator targetPackage="mapping.regulation" targetProject="src/main/resources"/>
         <!-- dao -->
         <javaClientGenerator targetPackage="com.lefinance.regulation.dao" targetProject="src/main/java" type="XMLMAPPER"/>
-        <table tableName="%">
+        <!--通配所有表-->
+        <!--<table tableName="%">-->
+        <table tableName="reg_business_data_record">
             <!--mysql 配置-->
             <!--<generatedKey column="SERIAL_ID" sqlStatement="Mysql" identity="true"/>-->
             <!--oracle 配置-->

@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 import java.math.BigDecimal;
 
 /**
- * Created by chenyong6 on 2017/4/25.
+ * @Author: jingyan
+ * @Time: 2017/6/29 15:59
+ * @Describe: 贷款额度报文实体类
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {

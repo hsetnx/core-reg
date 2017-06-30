@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefinance.regulation.dao.RegBusinessDataRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.lefinance.regulation.domain.RegBusinessDataRecord" >
+    <id column="serial_id" property="serialId" jdbcType="BIGINT" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+    <result column="msg_id" property="msgId" jdbcType="VARCHAR" />
+    <result column="creation_time" property="creationTime" jdbcType="TIMESTAMP" />
+    <result column="message" property="message" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <select id="selectByMsgId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select serial_id, trade_type, msg_id, creation_time, message
+    from reg_business_data_record
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="insert" parameterType="com.lefinance.regulation.domain.RegBusinessDataRecord" >
+    insert into reg_business_data_record (serial_id, trade_type, msg_id, 
+      creation_time, message)
+    values (#{serialId,jdbcType=BIGINT}, #{tradeType,jdbcType=VARCHAR}, #{msgId,jdbcType=VARCHAR}, 
+      #{creationTime,jdbcType=TIMESTAMP}, #{message,jdbcType=LONGVARCHAR})
+  </insert>
+
+</mapper>

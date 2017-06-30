@@ -1,7 +1,7 @@
 package com.lefinance.config.datasorce;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.lefinance.ApplicationProperties;
+import com.lefinance.common.constant.ApplicationProperties;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ import java.sql.SQLException;
 @EnableTransactionManagement
 public class DruidConfig {
 
-    private static Logger LOG = LoggerFactory.getLogger(DruidConfig.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
      * mapper locations
      */
@@ -55,7 +55,7 @@ public class DruidConfig {
     @Bean(name = "dataSource")
     @Primary
     public DataSource dataSource() {
-        LOG.info("druid initialization：/n" + druidProperties.toString());
+        logger.info("druid initialization：/n" + druidProperties.toString());
         DruidDataSource dataSource = new DruidDataSource();
         try {
             dataSource.setUrl(druidProperties.getUrl());
@@ -76,7 +76,7 @@ public class DruidConfig {
             dataSource.setLogAbandoned(druidProperties.isLogAbandoned());
             dataSource.setFilters(druidProperties.getFilters());
             dataSource.init();
-            LOG.info("druid initialization success...");
+            logger.info("druid initialization success...");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

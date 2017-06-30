@@ -1,4 +1,4 @@
-package com.lefinance;
+package com.lefinance.common.constant;
 
 
 import com.lefinance.common.utils.BundleUtil;
@@ -6,7 +6,7 @@ import com.lefinance.common.utils.BundleUtil;
 /**
  * @Author: jingyan
  * @Time: 2017/6/6 12:23
- * @Describe:
+ * @Describe: 公共配置
  */
 public class ApplicationProperties {
 

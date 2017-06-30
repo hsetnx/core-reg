@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by chenyong6 on 2017/5/5.
+ * @Author: jingyan
+ * @Time: 2017/6/29 16:00
+ * @Describe: 抵押质押报文实体类
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class HypopledgeInfo {

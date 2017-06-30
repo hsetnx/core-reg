@@ -1,9 +1,12 @@
 package com.lefinance.common.exception;
 
 /**
- * Created by chenyong6 on 2017/4/18.
+ * @Author: jingyan
+ * @Time: 2017/6/29 16:51
+ * @Describe: exception
  */
 public class CommonException extends RuntimeException{
+
     private int code;
     private String message;
 

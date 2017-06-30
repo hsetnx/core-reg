@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
- * Created by chenyong6 on 2017/4/26.
+ * @Author: jingyan
+ * @Time: 2017/6/29 16:03
+ * @Describe: 报文头
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {

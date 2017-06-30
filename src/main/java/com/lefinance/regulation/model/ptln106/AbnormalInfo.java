@@ -6,7 +6,9 @@ import javax.xml.bind.annotation.XmlElement;
 import java.util.Date;
 
 /**
- * Created by chenyong6 on 2017/4/25.
+ * @Author: jingyan
+ * @Time: 2017/6/29 16:02
+ * @Describe: 非正常客户
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AbnormalInfo {

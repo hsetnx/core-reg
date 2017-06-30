@@ -37,12 +37,12 @@ import java.util.List;
 /**
  * @Author: jingyan
  * @Time: 2017/6/27 11:51
- * @Describe:
+ * @Describe: 上报公共服务
  */
 @Service
 public abstract class DataPushBaseService {
 
-    private static Logger logger = LoggerFactory.getLogger(DataPushBaseService.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     private RegCqFileMapper regCqFileMapper;
     @Resource
@@ -127,6 +127,10 @@ public abstract class DataPushBaseService {
         record.setDataType(dataType);
         record.setStatus(RegulatoryContants.SendStatus.NOTIFIED);
         List<RegCqFile> list = regCqFileService.selectByDataTypeAndStatus(record);
+        if (PubMethod.isEmpty(list)) {
+            logger.info("查询结果入口---未查询到本地数据dataType={}", dataType);
+            return false;
+        }
         for (RegCqFile regCqFile : list) {
             this.queryReportResult(regCqFile.getGid());
         }

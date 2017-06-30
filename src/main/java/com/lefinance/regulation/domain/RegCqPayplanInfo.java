@@ -66,6 +66,43 @@ public class RegCqPayplanInfo {
 
     private String reservedField3;
 
+    @Override
+    public String toString() {
+        return "RegCqPayplanInfo{" +
+                "id=" + id +
+                ", gid='" + gid + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", createUser='" + createUser + '\'' +
+                ", updateUser='" + updateUser + '\'' +
+                ", returnCode='" + returnCode + '\'' +
+                ", returnDesc='" + returnDesc + '\'' +
+                ", returnData='" + returnData + '\'' +
+                ", transReturnCode='" + transReturnCode + '\'' +
+                ", transReturnDesc='" + transReturnDesc + '\'' +
+                ", isSuccess=" + isSuccess +
+                ", nextTime=" + nextTime +
+                ", retryNum=" + retryNum +
+                ", status=" + status +
+                ", batchGid='" + batchGid + '\'' +
+                ", reportTime=" + reportTime +
+                ", reportType='" + reportType + '\'' +
+                ", orgCode='" + orgCode + '\'' +
+                ", contractNo='" + contractNo + '\'' +
+                ", dueBillNo='" + dueBillNo + '\'' +
+                ", counter='" + counter + '\'' +
+                ", repayDate='" + repayDate + '\'' +
+                ", repayPriAmt=" + repayPriAmt +
+                ", repayIntAmt=" + repayIntAmt +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", remark='" + remark + '\'' +
+                ", reservedField1='" + reservedField1 + '\'' +
+                ", reservedField2='" + reservedField2 + '\'' +
+                ", reservedField3='" + reservedField3 + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

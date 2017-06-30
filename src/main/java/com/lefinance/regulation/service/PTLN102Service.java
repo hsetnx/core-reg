@@ -8,7 +8,6 @@ import com.lefinance.regulation.dao.RegCqContractInfoCoCustomerInfoMapper;
 import com.lefinance.regulation.dao.RegCqContractInfoMapper;
 import com.lefinance.regulation.domain.RegCqContractInfo;
 import com.lefinance.regulation.domain.RegCqContractInfoCoCustomerInfo;
-import com.lefinance.regulation.domain.RegCqFile;
 import com.lefinance.regulation.model.ptln102.CoCustomerInfo;
 import com.lefinance.regulation.model.ptln102.ContractInfo;
 import org.slf4j.Logger;
@@ -26,12 +25,12 @@ import java.util.List;
 /**
  * @Author: jingyan
  * @Time: 2017/6/27 14:49
- * @Describe:
+ * @Describe: 贷款合同上报
  */
 @Service("ptln102Service")
 public class PTLN102Service extends DataPushBaseService {
 
-    private static Logger LOG = LoggerFactory.getLogger(PTLN102Service.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     private RegCqContractInfoMapper regCqContractInfoMapper;
     @Resource
@@ -57,7 +56,7 @@ public class PTLN102Service extends DataPushBaseService {
         regCqContractInfo.setIsSuccess(false);
         List<RegCqContractInfo> dataList = regCqContractInfoMapper.selectBatchForUpload(regCqContractInfo);
         if (PubMethod.isEmpty(dataList)) {
-            LOG.info("数据锁定---未查询到数据...");
+            logger.info("数据锁定---102未查询到数据...");
             return null;
         }
         String batchGid = CommonUtils.getUUIDWithoutSeparator();
@@ -88,23 +87,26 @@ public class PTLN102Service extends DataPushBaseService {
     /**
      * @Author: jingyan
      * @Time: 2017/6/27 17:57
-     * @Describe: 实现父类---生成合同文件
+     * @Describe: 创建上报文件
      */
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public String crearteFile(String batchGid) {
         //查询批次数据详情
         List<RegCqContractInfo> dataList = regCqContractInfoMapper.selectByBatchGid(batchGid);
-        //生成文件
-        String fileNo = acctCreateKeyService.createContractSeq();
-        if (PubMethod.isEmpty(fileNo)) {
-            LOG.info("生成上报文件---获取文件编号为空：PTLN102");
+        if (PubMethod.isEmpty(dataList)) {
             return null;
         }
-        String filename = this.createLocalFile(convert(dataList), TransEnum.PTLN102, batchGid, fileNo);
-        LOG.info("生成上报文件---filename={}", filename);
+        //生成文件
+        String fileNo = acctCreateKeyService.createFileSequence(RegulatoryContants.FileSequence.REDIS_CACHE_FILE_102_SEQUENCE);
+        if (PubMethod.isEmpty(fileNo)) {
+            logger.info("生成上报文件---获取文件编号为空：PTLN102");
+            return null;
+        }
+        String filename = this.createLocalFile(this.convert(dataList), TransEnum.PTLN102, batchGid, fileNo);
+        logger.info("生成上报文件---filename={}", filename);
         //插入文件表
-        this.saveCqFileInfo(batchGid, filename, dataList.size());
+        this.regCqFileService.saveCqFileInfo(TransEnum.PTLN102, batchGid, filename, dataList.size());
         //插入日志表
         this.regCqFileLogService.insert(batchGid, Boolean.TRUE, RegulatoryContants.LogRemark.LOCK_DATA);
         return filename;
@@ -135,21 +137,6 @@ public class PTLN102Service extends DataPushBaseService {
 
     /**
      * @Author: jingyan
-     * @Time: 2017/6/27 17:07
-     * @Describe: 保存文件信息
-     */
-    public RegCqFile saveCqFileInfo(String batchGid, String fileName, int tatalSize) {
-        RegCqFile regCqFile = new RegCqFile();
-        regCqFile.setGid(batchGid);
-        regCqFile.setDataType(TransEnum.PTLN102.getDataType());
-        regCqFile.setFilename(fileName);
-        regCqFile.setFilepath(dataPushConfig.getLocalFileDirectory());
-        regCqFile.setRecordCount(tatalSize);
-        return regCqFileService.insert(regCqFile);
-    }
-
-    /**
-     * @Author: jingyan
      * @Time: 2017/6/27 17:40
      * @Describe: 更新合同表状态
      */
@@ -158,8 +145,27 @@ public class PTLN102Service extends DataPushBaseService {
             contractInfo.setStatus(status);
             contractInfo.setBatchGid(batchGid);
             contractInfo.setRetryNum(contractInfo.getRetryNum() + 1);
+            contractInfo.setReportTime(new Date());
             this.regCqContractInfoMapper.updateByPrimaryKeySelective(contractInfo);
         }
     }
 
+    /**
+     * @Author: jingyan
+     * @Time: 2017/6/30 18:30
+     * @Describe: 业务数据入库
+     */
+    @Transactional(rollbackFor = {RuntimeException.class, Exception.class}, propagation = Propagation.REQUIRES_NEW)
+    public int saveBusinessDate(RegCqContractInfo record) {
+        record.setCreateTime(new Date());
+        record.setUpdateTime(new Date());
+        record.setCreateUser("SYSTEM");
+        record.setUpdateUser("SYSTEM");
+        record.setIsSuccess(false);
+        record.setRetryNum(0);
+        record.setStatus(RegulatoryContants.DataStatus.UNREPORT);
+        record.setReportTime(new Date());
+        logger.info("102业务数据入库：" + record.toString());
+        return regCqContractInfoMapper.insert(record);
+    }
 }

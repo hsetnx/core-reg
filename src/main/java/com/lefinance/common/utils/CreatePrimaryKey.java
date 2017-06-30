@@ -27,6 +27,11 @@ public class CreatePrimaryKey extends LockCommonAbstract {
         this.maxLenth = maxLenth;
     }
 
+    /**
+     * @Author: jingyan
+     * @Time: 2017/6/28 18:31
+     * @Describe: 获取序列号
+     */
     @Override
     public Object run(String s, Map<String, Object> map) {
         //获取业务时间

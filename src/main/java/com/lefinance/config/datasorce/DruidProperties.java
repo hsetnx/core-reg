@@ -5,10 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * @Author: jingyan
  * @Time: 2017/5/19 18:12
- * @Describe:
+ * @Describe: druid 数据源
  */
 @ConfigurationProperties(prefix = "druid")
 public class DruidProperties {
+
     private String url;
     private String username;
     private String password;
@@ -27,7 +28,6 @@ public class DruidProperties {
     private int removeAbandonedTimeout;
     private boolean logAbandoned;
     private String filters;
-
 
     @Override
     public String toString() {

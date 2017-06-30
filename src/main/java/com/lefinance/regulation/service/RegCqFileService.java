@@ -1,6 +1,8 @@
 package com.lefinance.regulation.service;
 
 import com.lefinance.common.constant.RegulatoryContants;
+import com.lefinance.common.constant.TransEnum;
+import com.lefinance.config.datapush.DataPushConfig;
 import com.lefinance.regulation.dao.RegCqFileMapper;
 import com.lefinance.regulation.domain.RegCqFile;
 import org.springframework.stereotype.Service;
@@ -12,13 +14,30 @@ import java.util.List;
 /**
  * @Author: jingyan
  * @Time: 2017/6/27 16:52
- * @Describe:
+ * @Describe: 报送批次信息
  */
 @Service
 public class RegCqFileService {
 
     @Resource
     private RegCqFileMapper regCqFileMapper;
+    @Resource
+    protected DataPushConfig dataPushConfig;
+
+    /**
+     * @Author: jingyan
+     * @Time: 2017/6/27 17:07
+     * @Describe: 保存文件信息
+     */
+    public RegCqFile saveCqFileInfo(TransEnum transEnum,String batchGid, String fileName, int tatalSize) {
+        RegCqFile regCqFile = new RegCqFile();
+        regCqFile.setGid(batchGid);
+        regCqFile.setDataType(transEnum.getDataType());
+        regCqFile.setFilename(fileName);
+        regCqFile.setFilepath(dataPushConfig.getLocalFileDirectory());
+        regCqFile.setRecordCount(tatalSize);
+        return this.insert(regCqFile);
+    }
 
     /**
      * @Author: jingyan

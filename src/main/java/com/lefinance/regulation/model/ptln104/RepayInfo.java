@@ -4,15 +4,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
- * Created by chenyong6 on 2017/4/25.
+ * @Author: jingyan
+ * @Time: 2017/6/29 15:57
+ * @Describe: 还款信息报文实体类
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RepayInfo {
-    @XmlElement(name = "report_time")
-    private Date reportTime;
+
     @XmlElement(name = "report_type")
     private String reportType;
     @XmlElement(name = "org_code")
@@ -64,14 +64,6 @@ public class RepayInfo {
     @XmlElement(name = "reserved_field3")
     private String reservedField3;
 
-
-    public Date getReportTime() {
-        return reportTime;
-    }
-
-    public void setReportTime(Date reportTime) {
-        this.reportTime = reportTime;
-    }
 
     public String getReportType() {
         return reportType;
@@ -277,7 +269,6 @@ public class RepayInfo {
     @Override
     public String toString() {
         return "RepayInfo{" +
-                "reportTime=" + reportTime +
                 ", reportType='" + reportType + '\'' +
                 ", orgCode='" + orgCode + '\'' +
                 ", contractNo='" + contractNo + '\'' +

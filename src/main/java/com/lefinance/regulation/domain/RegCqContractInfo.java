@@ -132,6 +132,76 @@ public class RegCqContractInfo {
 
     private String reservedField3;
 
+    @Override
+    public String toString() {
+        return "RegCqContractInfo{" +
+                "id=" + id +
+                ", gid='" + gid + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", createUser='" + createUser + '\'' +
+                ", updateUser='" + updateUser + '\'' +
+                ", returnCode='" + returnCode + '\'' +
+                ", returnDesc='" + returnDesc + '\'' +
+                ", returnData='" + returnData + '\'' +
+                ", transReturnCode='" + transReturnCode + '\'' +
+                ", transReturnDesc='" + transReturnDesc + '\'' +
+                ", isSuccess=" + isSuccess +
+                ", nextTime=" + nextTime +
+                ", retryNum=" + retryNum +
+                ", status=" + status +
+                ", batchGid='" + batchGid + '\'' +
+                ", reportTime=" + reportTime +
+                ", reportType='" + reportType + '\'' +
+                ", orgCode='" + orgCode + '\'' +
+                ", contractNo='" + contractNo + '\'' +
+                ", loanCate='" + loanCate + '\'' +
+                ", contractName='" + contractName + '\'' +
+                ", customerType='" + customerType + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", certificateType='" + certificateType + '\'' +
+                ", certificateNo='" + certificateNo + '\'' +
+                ", linkman='" + linkman + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", loanObject='" + loanObject + '\'' +
+                ", loanObjectSize='" + loanObjectSize + '\'' +
+                ", contractSignDate='" + contractSignDate + '\'' +
+                ", contractBeginDate='" + contractBeginDate + '\'' +
+                ", contractEndDate='" + contractEndDate + '\'' +
+                ", contractAmount=" + contractAmount +
+                ", outstanding=" + outstanding +
+                ", guarType='" + guarType + '\'' +
+                ", ccy='" + ccy + '\'' +
+                ", isRealQuotaLoan='" + isRealQuotaLoan + '\'' +
+                ", realQuotaNo='" + realQuotaNo + '\'' +
+                ", intRate=" + intRate +
+                ", priPltyRate=" + priPltyRate +
+                ", contractStatus='" + contractStatus + '\'' +
+                ", relationManager='" + relationManager + '\'' +
+                ", disputeScheme='" + disputeScheme + '\'' +
+                ", conCustomerType='" + conCustomerType + '\'' +
+                ", conCustomerName='" + conCustomerName + '\'' +
+                ", conCertificateType='" + conCertificateType + '\'' +
+                ", conCertificateNo='" + conCertificateNo + '\'' +
+                ", conJurisitc='" + conJurisitc + '\'' +
+                ", conTelephone='" + conTelephone + '\'' +
+                ", conLocus='" + conLocus + '\'' +
+                ", conPostalcode='" + conPostalcode + '\'' +
+                ", conFincalOrg='" + conFincalOrg + '\'' +
+                ", conAccountNo='" + conAccountNo + '\'' +
+                ", assCustomerName='" + assCustomerName + '\'' +
+                ", assJuristic='" + assJuristic + '\'' +
+                ", assTelephone='" + assTelephone + '\'' +
+                ", assLocus='" + assLocus + '\'' +
+                ", assPostalcode='" + assPostalcode + '\'' +
+                ", conFee=" + conFee +
+                ", remark='" + remark + '\'' +
+                ", reservedField1='" + reservedField1 + '\'' +
+                ", reservedField2='" + reservedField2 + '\'' +
+                ", reservedField3='" + reservedField3 + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

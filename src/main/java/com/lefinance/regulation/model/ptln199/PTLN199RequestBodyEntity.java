@@ -6,7 +6,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Created by chenyong6 on 2017/4/26.
+ * @Author: jingyan
+ * @Time: 2017/6/29 16:03
+ * @Describe: 查询
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {

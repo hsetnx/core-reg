@@ -1,6 +1,6 @@
 package com.lefinance.config.datasorce;
 
-import com.lefinance.ApplicationProperties;
+import com.lefinance.common.constant.ApplicationProperties;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @Author: jingyan
  * @Time: 2017/6/6 15:41
- * @Describe:
+ * @Describe: MapperScannerConfigurer 配置
  */
 @Configuration
 public class MybatisConfig {

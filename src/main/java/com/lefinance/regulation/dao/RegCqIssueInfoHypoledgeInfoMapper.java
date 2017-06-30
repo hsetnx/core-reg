@@ -13,4 +13,6 @@ public interface RegCqIssueInfoHypoledgeInfoMapper {
     List<RegCqIssueInfoHypoledgeInfo> selectAll();
 
     int updateByPrimaryKey(RegCqIssueInfoHypoledgeInfo record);
+
+    List<RegCqIssueInfoHypoledgeInfo> selectByIssueInfoGid(String issueInfoGid);
 }

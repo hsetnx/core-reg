@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by chenyong6 on 2017/4/25.
+ * @Author: jingyan
+ * @Time: 2017/6/29 15:58
+ * @Describe: 贷款发放报文实体类
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class IssueInfo {

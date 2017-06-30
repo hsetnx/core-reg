@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by chenyong6 on 2017/4/25.
+ * @Author: jingyan
+ * @Time: 2017/6/29 16:02
+ * @Describe: 网签
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class NetbookInfo {
