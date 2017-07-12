@@ -93,7 +93,8 @@
         limit 100
     </select>
 
-    <select id="selectByBatchGid" parameterType="com.lefinance.regulation.domain.RegCqContractInfo" resultMap="BaseResultMap">
+    <select id="selectByBatchGid" parameterType="com.lefinance.regulation.domain.RegCqContractInfo"
+            resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from reg_cq_contract_info
@@ -104,7 +105,8 @@
         update reg_cq_contract_info
         set update_time = #{updateTime,jdbcType=TIMESTAMP},
         update_user = #{updateUser,jdbcType=VARCHAR},
-        status = #{status,jdbcType=INTEGER}
+        status = #{status,jdbcType=INTEGER},
+        is_success = #{isSuccess,jdbcType=BIT}
         where batch_gid = #{batchGid,jdbcType=VARCHAR}
     </update>
 

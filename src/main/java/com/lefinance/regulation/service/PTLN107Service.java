@@ -4,9 +4,9 @@ import com.lefinance.common.constant.RegulatoryContants;
 import com.lefinance.common.constant.TransEnum;
 import com.lefinance.common.utils.CommonUtils;
 import com.lefinance.common.utils.PubMethod;
-import com.lefinance.regulation.dao.RegCqPayplanInfoMapper;
-import com.lefinance.regulation.domain.RegCqPayplanInfo;
-import com.lefinance.regulation.model.ptln105.PayplanInfo;
+import com.lefinance.regulation.dao.RegCqNetbookInfoMapper;
+import com.lefinance.regulation.domain.RegCqNetbookInfo;
+import com.lefinance.regulation.model.ptln107.NetbookInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -21,15 +21,15 @@ import java.util.List;
 
 /**
  * @Author: jingyan
- * @Time: 2017/6/28 18:07
- * @Describe: 还款计划上报
+ * @Time: 2017/7/4 12:00
+ * @Describe:
  */
-@Service("ptln105Service")
-public class PTLN105Service extends DataPushBaseService {
+@Service("ptln107Service")
+public class PTLN107Service extends DataPushBaseService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
-    private RegCqPayplanInfoMapper regCqPayplanInfoMapper;
+    private RegCqNetbookInfoMapper regCqNetbookInfoMapper;
     @Resource
     private AcctCreateKeyService acctCreateKeyService;
     @Resource
@@ -39,67 +39,69 @@ public class PTLN105Service extends DataPushBaseService {
 
     /**
      * @Author: jingyan
-     * @Time: 2017/6/28 18:19
-     * @Describe: 批量锁定数据
+     * @Time: 2017/7/4 14:48
+     * @Describe: 锁定数据
      */
     @Override
     public String lockData() {
-        RegCqPayplanInfo record = new RegCqPayplanInfo();
+        RegCqNetbookInfo record = new RegCqNetbookInfo();
         record.setStatus(RegulatoryContants.DataStatus.UNREPORT);
         record.setRetryNum(dataPushConfig.getRetryNum());
         record.setIsSuccess(false);
-        List<RegCqPayplanInfo> dataList = regCqPayplanInfoMapper.selectBatchForUpload(record);
+        List<RegCqNetbookInfo> dataList = regCqNetbookInfoMapper.selectBatchForUpload(record);
         if (PubMethod.isEmpty(dataList)) {
-            logger.info("数据锁定---105未查询到数据...");
+            logger.info("数据锁定---107未查询到数据...");
             return null;
         }
         String batchGid = CommonUtils.getUUIDWithoutSeparator();
-        this.updateRegCqIssueInfo(dataList, RegulatoryContants.DataStatus.REPORTING, batchGid);
+        //更新合同表数据状态,锁住这批数据
+        this.updateRegCqNetbookInfo(dataList, RegulatoryContants.DataStatus.REPORTING, batchGid);
         return batchGid;
     }
 
     /**
      * @Author: jingyan
-     * @Time: 2017/6/28 18:20
-     * @Describe: 批量解锁数据
+     * @Time: 2017/7/4 14:51
+     * @Describe: 解锁数据
      */
     @Override
     public String unlockData(String batchGid, int status) {
-        RegCqPayplanInfo record = new RegCqPayplanInfo();
+        RegCqNetbookInfo record = new RegCqNetbookInfo();
         record.setBatchGid(batchGid);
         record.setStatus(status);
         record.setUpdateTime(new Date());
         record.setUpdateUser("SYSTEM");
         if (RegulatoryContants.DataStatus.REPORTED == status) {
             record.setIsSuccess(true);
-        }else {
-            record.setIsSuccess(Boolean.FALSE);
+        } else {
+            record.setIsSuccess(false);
         }
-        regCqPayplanInfoMapper.updateByBatchGid(record);
+        this.regCqNetbookInfoMapper.updateByBatchGid(record);
         return batchGid;
     }
 
     /**
      * @Author: jingyan
-     * @Time: 2017/6/28 18:20
-     * @Describe: 创建上报文件
+     * @Time: 2017/7/4 15:31
+     * @Describe: 生成文件
      */
     @Override
     public String crearteFile(String batchGid) {
-        List<RegCqPayplanInfo> dataList = regCqPayplanInfoMapper.selectByBatchGid(batchGid);
+        //查询批次数据详情
+        List<RegCqNetbookInfo> dataList = regCqNetbookInfoMapper.selectByBatchGid(batchGid);
         if (PubMethod.isEmpty(dataList)) {
             return null;
         }
         //生成文件
-        String fileNo = acctCreateKeyService.createFileSequence(RegulatoryContants.FileSequence.REDIS_CACHE_FILE_105_SEQUENCE);
+        String fileNo = acctCreateKeyService.createFileSequence(RegulatoryContants.FileSequence.REDIS_CACHE_FILE_107_SEQUENCE);
         if (PubMethod.isEmpty(fileNo)) {
-            logger.info("生成上报文件---获取文件编号为空：PTLN103");
+            logger.info("生成上报文件---获取文件编号为空：PTLN107");
             return null;
         }
-        String filename = this.createLocalFile(this.convert(dataList), TransEnum.PTLN105, batchGid, fileNo);
+        String filename = this.createLocalFile(this.convert(dataList), TransEnum.PTLN107, batchGid, fileNo);
         logger.info("生成上报文件---filename={}", filename);
         //插入文件表
-        this.regCqFileService.saveCqFileInfo(TransEnum.PTLN105, batchGid, filename, dataList.size());
+        this.regCqFileService.saveCqFileInfo(TransEnum.PTLN107, batchGid, filename, dataList.size());
         //插入日志表
         this.regCqFileLogService.insert(batchGid, Boolean.TRUE, RegulatoryContants.LogRemark.LOCK_DATA);
         return filename;
@@ -107,30 +109,31 @@ public class PTLN105Service extends DataPushBaseService {
 
     /**
      * @Author: jingyan
-     * @Time: 2017/6/27 17:40
-     * @Describe: 更新表状态
+     * @Time: 2017/7/4 14:49
+     * @Describe: 更新数据
      */
-    public void updateRegCqIssueInfo(List<RegCqPayplanInfo> dataList, Integer status, String batchGid) {
-        for (RegCqPayplanInfo record : dataList) {
-            record.setStatus(status);
-            record.setBatchGid(batchGid);
-            record.setRetryNum(record.getRetryNum() + 1);
-            this.regCqPayplanInfoMapper.updateByPrimaryKeySelective(record);
+    public void updateRegCqNetbookInfo(List<RegCqNetbookInfo> dataList, Integer status, String batchGid) {
+        for (RegCqNetbookInfo netbookInfo : dataList) {
+            netbookInfo.setStatus(status);
+            netbookInfo.setBatchGid(batchGid);
+            netbookInfo.setRetryNum(netbookInfo.getRetryNum() + 1);
+            netbookInfo.setReportTime(new Date());
+            this.regCqNetbookInfoMapper.updateByPrimaryKeySelective(netbookInfo);
         }
     }
 
     /**
      * @Author: jingyan
-     * @Time: 2017/6/29 14:18
+     * @Time: 2017/7/4 15:32
      * @Describe: 组装数据
      */
-    private List<PayplanInfo> convert(List<RegCqPayplanInfo> dataList) {
-        List<PayplanInfo> list = new ArrayList<>();
+    private List<NetbookInfo> convert(List<RegCqNetbookInfo> dataList) {
+        List<NetbookInfo> list = new ArrayList<>();
         if (PubMethod.isEmpty(dataList)) {
             return list;
         }
-        for (RegCqPayplanInfo data : dataList) {
-            PayplanInfo info = new PayplanInfo();
+        for (RegCqNetbookInfo data : dataList) {
+            NetbookInfo info = new NetbookInfo();
             BeanUtils.copyProperties(data, info);
             list.add(info);
         }
@@ -143,7 +146,7 @@ public class PTLN105Service extends DataPushBaseService {
      * @Describe: 业务数据入库
      */
     @Transactional(rollbackFor = {RuntimeException.class, Exception.class}, propagation = Propagation.REQUIRES_NEW)
-    public int saveBusinessDate(RegCqPayplanInfo record) {
+    public int saveBusinessDate(RegCqNetbookInfo record) {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
         record.setCreateUser("SYSTEM");
@@ -153,7 +156,8 @@ public class PTLN105Service extends DataPushBaseService {
         record.setStatus(RegulatoryContants.DataStatus.UNREPORT);
         record.setReportTime(new Date());
         record.setOrgCode(dataPushConfig.getLocalBranchId());
-        logger.info("105业务数据入库：" + record.toString());
-        return regCqPayplanInfoMapper.insert(record);
+        logger.info("107业务数据入库：" + record.toString());
+        return regCqNetbookInfoMapper.insert(record);
     }
 }
+

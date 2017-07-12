@@ -51,14 +51,14 @@ public enum TransEnum {
             RegulatoryContants.TransMode.ASYNC,
             RegulatoryContants.DataType.NETBOOK_INFO,
             RegulatoryContants.MessageType.TYPE_1220,
-            RegulatoryContants.MessageCode.CODE_0103,
+            RegulatoryContants.MessageCode.CODE_0107,
             RegulatoryContants.ServiceCode.SVR_FILE, "网签文件上报"),
     PTLN199(RegulatoryContants.TransCode.PTLN199,
             RegulatoryContants.TransMode.ONLINE,
             "",
             RegulatoryContants.MessageType.TYPE_1220,
             RegulatoryContants.MessageCode.CODE_0199,
-            RegulatoryContants.ServiceCode.SVR_FILE, "上报信息查询");
+            RegulatoryContants.ServiceCode.SVN_PTLN, "上报信息查询");
 
 
     private String transCode;

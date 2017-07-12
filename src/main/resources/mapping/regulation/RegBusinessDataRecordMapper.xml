@@ -9,7 +9,7 @@
     <result column="message" property="message" jdbcType="LONGVARCHAR" />
   </resultMap>
 
-  <select id="selectByMsgId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByMsgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select serial_id, trade_type, msg_id, creation_time, message
     from reg_business_data_record
     where msg_id = #{msgId,jdbcType=VARCHAR}

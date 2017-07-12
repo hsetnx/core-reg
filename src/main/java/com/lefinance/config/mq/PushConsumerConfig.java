@@ -1,46 +1,29 @@
 package com.lefinance.config.mq;
 
 import com.lefinance.common.mq.push.DefaultPushConsumer;
-import com.lefinance.common.mq.push.PushListenerAbstract;
-import com.lefinance.regulation.mqlistener.Ptln102ConsumerListener;
-import com.lefinance.regulation.mqlistener.Ptln103ConsumerListener;
-import com.lefinance.regulation.mqlistener.Ptln104ConsumerListener;
-import com.lefinance.regulation.mqlistener.Ptln105ConsumerListener;
+import com.lefinance.regulation.mqlistener.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * @Author: jingyan
  * @Time: 2017/6/30 14:58
  * @Describe: mqConsumer 实例化
  */
-@Configuration
+@Component
 public class PushConsumerConfig {
 
-    /*
-    * MQ 服务器IP
-    * */
     @Value("${namesrvAddr}")
     private String namesrvAddr;
-    /*
-    * 消费者组
-    * */
     @Value("${consumer.group}")
     private String group;
-    /*
-    * 业务数据入库 TOPIC
-    * */
-    @Value("${business.data.topic}")
-    private String businessDataTopic;
-    /*
-    * 消费者最大批处理数量
-    * */
     @Value("${batch.max.size}")
     private int batchMaxSize;
-    /*
-    * 各个tag
-    * */
+    @Value("${business.data.topic}")
+    private String businessDataTopic;
     @Value("${ptln102.tag}")
     private String ptln102;
     @Value("${ptln103.tag}")
@@ -49,6 +32,20 @@ public class PushConsumerConfig {
     private String ptln104;
     @Value("${ptln105.tag}")
     private String ptln105;
+    @Value("${ptln107.tag}")
+    private String ptln107;
+
+    @Resource
+    private Ptln102ConsumerListener ptln102ConsumerListener;
+    @Resource
+    private Ptln103ConsumerListener ptln103ConsumerListener;
+    @Resource
+    private Ptln104ConsumerListener ptln104ConsumerListener;
+    @Resource
+    private Ptln105ConsumerListener ptln105ConsumerListener;
+    @Resource
+    private Ptln107ConsumerListener ptln107ConsumerListener;
+
 
     /**
      * @Author: jingyan
@@ -57,11 +54,10 @@ public class PushConsumerConfig {
      */
     @Bean(name = "ptln102Consumer", initMethod = "init", destroyMethod = "destroy")
     public DefaultPushConsumer ptln102Consumer() {
-        Ptln102ConsumerListener ptln102Listener = new Ptln102ConsumerListener();
-        ptln102Listener.setTopic(businessDataTopic);
-        ptln102Listener.setTag(ptln102);
-        ptln102Listener.setMaxNums(batchMaxSize);
-        return this.createPushConsumer(ptln102Listener);
+        DefaultPushConsumer ptln102Consumer = new DefaultPushConsumer(namesrvAddr, group, businessDataTopic,
+                ptln102, batchMaxSize);
+        ptln102Consumer.setPushListenerAbstract(ptln102ConsumerListener);
+        return ptln102Consumer;
     }
 
     /**
@@ -71,11 +67,10 @@ public class PushConsumerConfig {
      */
     @Bean(name = "ptln103Consumer", initMethod = "init", destroyMethod = "destroy")
     public DefaultPushConsumer ptln103Consumer() {
-        Ptln103ConsumerListener ptln103Listener = new Ptln103ConsumerListener();
-        ptln103Listener.setTopic(businessDataTopic);
-        ptln103Listener.setTag(ptln103);
-        ptln103Listener.setMaxNums(batchMaxSize);
-        return this.createPushConsumer(ptln103Listener);
+        DefaultPushConsumer ptln103Consumer = new DefaultPushConsumer(namesrvAddr, group, businessDataTopic,
+                ptln103, batchMaxSize);
+        ptln103Consumer.setPushListenerAbstract(ptln103ConsumerListener);
+        return ptln103Consumer;
     }
 
     /**
@@ -85,11 +80,10 @@ public class PushConsumerConfig {
      */
     @Bean(name = "ptln104Consumer", initMethod = "init", destroyMethod = "destroy")
     public DefaultPushConsumer ptln104Consumer() {
-        Ptln104ConsumerListener ptln104Listener = new Ptln104ConsumerListener();
-        ptln104Listener.setTopic(businessDataTopic);
-        ptln104Listener.setTag(ptln104);
-        ptln104Listener.setMaxNums(batchMaxSize);
-        return this.createPushConsumer(ptln104Listener);
+        DefaultPushConsumer ptln104Consumer = new DefaultPushConsumer(namesrvAddr, group, businessDataTopic,
+                ptln104, batchMaxSize);
+        ptln104Consumer.setPushListenerAbstract(ptln104ConsumerListener);
+        return ptln104Consumer;
     }
 
     /**
@@ -99,25 +93,25 @@ public class PushConsumerConfig {
      */
     @Bean(name = "ptln105Consumer", initMethod = "init", destroyMethod = "destroy")
     public DefaultPushConsumer ptln105Consumer() {
-        Ptln105ConsumerListener ptln105Listener = new Ptln105ConsumerListener();
-        ptln105Listener.setTopic(businessDataTopic);
-        ptln105Listener.setTag(ptln105);
-        ptln105Listener.setMaxNums(batchMaxSize);
-        return this.createPushConsumer(ptln105Listener);
+        DefaultPushConsumer ptln105Consumer = new DefaultPushConsumer(namesrvAddr, group, businessDataTopic,
+                ptln105, batchMaxSize);
+        ptln105Consumer.setPushListenerAbstract(ptln105ConsumerListener);
+        return ptln105Consumer;
     }
 
     /**
      * @Author: jingyan
-     * @Time: 2017/6/30 15:35
-     * @Describe: 创建consumer
+     * @Time: 2017/6/30 15:26
+     * @Describe: ptln105Consumer
      */
-    public DefaultPushConsumer createPushConsumer(PushListenerAbstract ptlnListener) {
-        DefaultPushConsumer ptlnConsumer = new DefaultPushConsumer();
-        ptlnConsumer.setNamesrvAddr(namesrvAddr);
-        ptlnConsumer.setGroup(group + ptlnListener.getTag());
-        ptlnConsumer.setPushListenerAbstract(ptlnListener);
-        return ptlnConsumer;
+    @Bean(name = "ptln107Consumer", initMethod = "init", destroyMethod = "destroy")
+    public DefaultPushConsumer ptln107Consumer() {
+        DefaultPushConsumer ptln107Consumer = new DefaultPushConsumer(namesrvAddr, group, businessDataTopic,
+                ptln107, batchMaxSize);
+        ptln107Consumer.setPushListenerAbstract(ptln107ConsumerListener);
+        return ptln107Consumer;
     }
+
 
     public String getNamesrvAddr() {
         return namesrvAddr;

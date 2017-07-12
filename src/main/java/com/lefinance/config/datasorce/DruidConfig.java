@@ -26,7 +26,7 @@ import java.sql.SQLException;
 /**
  * @Author: jingyan
  * @Time: 2017/6/5 11:31
- * @Describe:
+ * @Describe: 数据库连接池
  */
 @Configuration
 @ConditionalOnClass(DruidDataSource.class)                  //存在DruidDataSource的类才创建Bean
@@ -64,7 +64,7 @@ public class DruidConfig {
             dataSource.setInitialSize(druidProperties.getInitialSize() == 0 ? 1 : druidProperties.getInitialSize());
             dataSource.setMaxActive(druidProperties.getMaxActive() == 0 ? 20 : druidProperties.getMaxActive());
             dataSource.setMinIdle(druidProperties.getMinIdle() == 0 ? 1 : druidProperties.getMinIdle());
-            dataSource.setMaxWait(druidProperties.getMaxWait() == 0 ? 5000 : druidProperties.getMaxWait());
+            dataSource.setMaxWait(druidProperties.getMaxWait() == 0 ? 60000 : druidProperties.getMaxWait());
             dataSource.setTimeBetweenEvictionRunsMillis(druidProperties.getTimeBetweenEvictionRunsMillis());
             dataSource.setMinEvictableIdleTimeMillis(druidProperties.getMinEvictableIdleTimeMillis());
             dataSource.setValidationQuery(druidProperties.getValidationQuery());

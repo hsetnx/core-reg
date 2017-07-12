@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by chenyong6 on 2017/4/28.
+ * @Author: jingyan
+ * @Time: 2017/7/3 17:57
+ * @Describe: 上报服务配置
  */
 @Component
 public class DataPushConfig {
+
     @Value("${local.branch.id}")
     private String localBranchId;
     @Value("${local.file.directory}")

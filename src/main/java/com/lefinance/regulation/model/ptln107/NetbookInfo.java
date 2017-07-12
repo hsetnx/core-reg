@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * @Author: jingyan
@@ -13,10 +12,6 @@ import java.util.Date;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class NetbookInfo {
-    @XmlElement(name = "report_time")
-    private Date reportTime;
-    @XmlElement(name = "report_type")
-    private String reportType;
     @XmlElement(name = "org_code")
     private String orgCode;
     @XmlElement(name = "contract_no")
@@ -56,22 +51,6 @@ public class NetbookInfo {
     @XmlElement(name = "reserved_field3")
     private String reservedField3;
 
-
-    public Date getReportTime() {
-        return reportTime;
-    }
-
-    public void setReportTime(Date reportTime) {
-        this.reportTime = reportTime;
-    }
-
-    public String getReportType() {
-        return reportType;
-    }
-
-    public void setReportType(String reportType) {
-        this.reportType = reportType;
-    }
 
     public String getOrgCode() {
         return orgCode;
@@ -228,8 +207,6 @@ public class NetbookInfo {
     @Override
     public String toString() {
         return "NetbookInfo{" +
-                "reportTime=" + reportTime +
-                ", reportType='" + reportType + '\'' +
                 ", orgCode='" + orgCode + '\'' +
                 ", contractNo='" + contractNo + '\'' +
                 ", loanCate='" + loanCate + '\'' +

@@ -423,19 +423,18 @@ public abstract class DataPushBaseService {
         XmlRequestHeaderEntity headerEntity = new XmlRequestHeaderEntity();
         headerEntity.setServiceCode(transEnum.getServiceCode());
         headerEntity.setTranCode(transEnum.getTransCode());
-        headerEntity.setTranType("");
         headerEntity.setTranMode(transEnum.getTransMode());
         headerEntity.setBranchId(dataPushConfig.getLocalBranchId());
         headerEntity.setTranDate(CommonUtils.formateDate(new Date(), "yyyyMMdd"));
         headerEntity.setTranTimestamp(CommonUtils.formateDate(new Date(), "HHmmssSSS"));
-        headerEntity.setServerId("");
-        headerEntity.setWsId(CommonUtils.getServerIP());
+
         headerEntity.setUserLang("CHINESE");
         headerEntity.setSeqNo(seqNo);
-        headerEntity.setDestBranchNo("");
-        headerEntity.setSourceBranchNo("");
         headerEntity.setModuleId("CL");
-        headerEntity.setFilePath(filePath);
+        if(TransEnum.PTLN199 != transEnum){
+            headerEntity.setFilePath(filePath);
+            headerEntity.setWsId(CommonUtils.getServerIP());
+        }
         headerEntity.setMessageType(transEnum.getMsgType());
         headerEntity.setMessageCode(transEnum.getMsgCode());
         return new XmlRequestHeader(headerEntity);

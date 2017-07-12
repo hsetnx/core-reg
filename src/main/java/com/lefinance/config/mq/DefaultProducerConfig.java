@@ -25,7 +25,7 @@ public class DefaultProducerConfig {
      * 用法 :   @Resource DefaultProducer defaultProducer
      */
     @Bean(name = "defaultProducer", initMethod = "init", destroyMethod = "destroy")
-    public DefaultProducer ptln102Consumer() {
+    public DefaultProducer getDefaultProducer() {
         DefaultProducer defaultProducer = new DefaultProducer();
         defaultProducer.setNamesrvAddr(namesrvAddr);
         defaultProducer.setGroup(group);

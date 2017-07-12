@@ -13,8 +13,7 @@ import java.util.Date;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PayplanInfo {
-    @XmlElement(name = "report_time")
-    private Date reportTime;
+
     @XmlElement(name = "report_type")
     private String reportType;
     @XmlElement(name = "org_code")
@@ -44,14 +43,6 @@ public class PayplanInfo {
     @XmlElement(name = "reserved_field3")
     private String reservedField3;
 
-
-    public Date getReportTime() {
-        return reportTime;
-    }
-
-    public void setReportTime(Date reportTime) {
-        this.reportTime = reportTime;
-    }
 
     public String getReportType() {
         return reportType;
@@ -168,7 +159,6 @@ public class PayplanInfo {
     @Override
     public String toString() {
         return "PayplanInfo{" +
-                "reportTime=" + reportTime +
                 ", reportType='" + reportType + '\'' +
                 ", orgCode='" + orgCode + '\'' +
                 ", contractNo='" + contractNo + '\'' +

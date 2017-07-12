@@ -78,7 +78,9 @@ public class PTLN102Service extends DataPushBaseService {
         record.setUpdateTime(new Date());
         record.setUpdateUser("SYSTEM");
         if (RegulatoryContants.DataStatus.REPORTED == status) {
-            record.setIsSuccess(true);
+            record.setIsSuccess(Boolean.TRUE);
+        }else {
+            record.setIsSuccess(Boolean.FALSE);
         }
         this.regCqContractInfoMapper.updateByBatchGid(record);
         return batchGid;
@@ -165,6 +167,7 @@ public class PTLN102Service extends DataPushBaseService {
         record.setRetryNum(0);
         record.setStatus(RegulatoryContants.DataStatus.UNREPORT);
         record.setReportTime(new Date());
+        record.setOrgCode(dataPushConfig.getLocalBranchId());
         logger.info("102业务数据入库：" + record.toString());
         return regCqContractInfoMapper.insert(record);
     }

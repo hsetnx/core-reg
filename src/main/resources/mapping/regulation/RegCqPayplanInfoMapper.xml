@@ -58,7 +58,8 @@
     update reg_cq_payplan_info
     set update_time = #{updateTime,jdbcType=TIMESTAMP},
     update_user = #{updateUser,jdbcType=VARCHAR},
-    status = #{status,jdbcType=INTEGER}
+    status = #{status,jdbcType=INTEGER},
+    is_success = #{isSuccess,jdbcType=BIT}
     where batch_gid = #{batchGid,jdbcType=VARCHAR}
   </update>
 

@@ -17,12 +17,6 @@ import java.util.List;
 public abstract class PushListenerAbstract implements MessageListenerConcurrently {
 
     private final Logger logger = LoggerFactory.getLogger(PushListenerAbstract.class);
-    //订阅主题
-    private String topic;
-    //订阅标签
-    private String tag;
-    //最大批量消息处理数目
-    private int maxNums;
 
     /**
      * @Author: jingyan
@@ -42,36 +36,4 @@ public abstract class PushListenerAbstract implements MessageListenerConcurrentl
         return this.handleMsg(msgs, context);
     }
 
-    @Override
-    public String toString() {
-        return "PushListenerAbstract{" +
-                "topic='" + topic + '\'' +
-                ", tag='" + tag + '\'' +
-                ", maxNums=" + maxNums +
-                '}';
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public int getMaxNums() {
-        return maxNums;
-    }
-
-    public void setMaxNums(int maxNums) {
-        this.maxNums = maxNums;
-    }
 }

@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,8 +13,6 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class IssueInfo {
-    @XmlElement(name = "report_time")
-    private Date reportTime;
     @XmlElement(name = "report_type")
     private String reportType;
     @XmlElement(name = "org_code")
@@ -78,8 +75,6 @@ public class IssueInfo {
     private String issueStatus;
     @XmlElement(name = "hypopledge_info")
     private List<HypopledgeInfo> hypopledgeInfoList;
-    @XmlElement(name = "remark")
-    private String remark;
     @XmlElement(name = "reserved_field1")
     private String reservedField1;
     @XmlElement(name = "reserved_field2")
@@ -87,14 +82,6 @@ public class IssueInfo {
     @XmlElement(name = "reserved_field3")
     private String reservedField3;
 
-
-    public Date getReportTime() {
-        return reportTime;
-    }
-
-    public void setReportTime(Date reportTime) {
-        this.reportTime = reportTime;
-    }
 
     public String getReportType() {
         return reportType;
@@ -344,14 +331,6 @@ public class IssueInfo {
         this.hypopledgeInfoList = hypopledgeInfoList;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public String getReservedField1() {
         return reservedField1;
     }
@@ -379,7 +358,6 @@ public class IssueInfo {
     @Override
     public String toString() {
         return "IssueInfo{" +
-                "reportTime=" + reportTime +
                 ", reportType='" + reportType + '\'' +
                 ", orgCode='" + orgCode + '\'' +
                 ", contractNo='" + contractNo + '\'' +
@@ -411,7 +389,6 @@ public class IssueInfo {
                 ", riskLevel='" + riskLevel + '\'' +
                 ", issueStatus='" + issueStatus + '\'' +
                 ", hypopledgeInfoList=" + hypopledgeInfoList +
-                ", remark='" + remark + '\'' +
                 ", reservedField1='" + reservedField1 + '\'' +
                 ", reservedField2='" + reservedField2 + '\'' +
                 ", reservedField3='" + reservedField3 + '\'' +

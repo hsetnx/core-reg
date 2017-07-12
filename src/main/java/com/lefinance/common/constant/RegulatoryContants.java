@@ -170,6 +170,8 @@ public class RegulatoryContants {
         public static final String REDIS_CACHE_FILE_103_SEQUENCE = "REDIS_CACHE_FILE_103_";
         public static final String REDIS_CACHE_FILE_104_SEQUENCE = "REDIS_CACHE_FILE_104_";
         public static final String REDIS_CACHE_FILE_105_SEQUENCE = "REDIS_CACHE_FILE_105_";
+        public static final String REDIS_CACHE_FILE_106_SEQUENCE = "REDIS_CACHE_FILE_106_";
+        public static final String REDIS_CACHE_FILE_107_SEQUENCE = "REDIS_CACHE_FILE_107_";
     }
 
     public static class TransCode {

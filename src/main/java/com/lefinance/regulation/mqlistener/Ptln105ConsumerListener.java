@@ -10,6 +10,7 @@ import com.lefinance.regulation.service.PTLN105Service;
 import com.lefinance.regulation.service.RegBusinessDataRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
  * @Time: 2017/6/30 14:54
  * @Describe:
  */
+@Component
 public class Ptln105ConsumerListener extends PushListenerAbstract {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -26,7 +28,6 @@ public class Ptln105ConsumerListener extends PushListenerAbstract {
     private PTLN105Service ptln105Service;
     @Resource
     private RegBusinessDataRecordService regBusinessDataRecordService;
-
 
     /**
      * @Author: jingyan
@@ -38,6 +39,7 @@ public class Ptln105ConsumerListener extends PushListenerAbstract {
         try {
             for (MessageExt messageExt : messageExts) {
                 String jsonStr = new String(messageExt.getBody());
+                logger.info("105消息消费,msgBody={}", jsonStr);
                 boolean flag = regBusinessDataRecordService.checkMsgRecord(messageExt.getMsgId(), jsonStr);
                 if (!flag) {
                     logger.info("105消息重复消费,msgId={}", messageExt.getMsgId());
@@ -50,6 +52,6 @@ public class Ptln105ConsumerListener extends PushListenerAbstract {
         } catch (Exception e) {
             logger.error("105消息消费异常：" + e.getMessage());
         }
-        return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 }
