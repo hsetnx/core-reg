@@ -1,2 +1,2 @@
-# 重庆小贷 监管上报服务
 # @Author: jingyan
+# Tip: linux 启动命令： sh start.sh [develop | product]     根据环境多选一
