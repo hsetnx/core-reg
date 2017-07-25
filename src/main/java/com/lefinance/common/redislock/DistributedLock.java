@@ -1,7 +1,5 @@
-package com.lefinance.common.utils;
+package com.lefinance.common.redislock;
 
-
-import com.leFinance.creditLoan.redisDistributedLock.JedisLock;
 
 /**
  * @Author: jingyan
@@ -10,24 +8,18 @@ import com.leFinance.creditLoan.redisDistributedLock.JedisLock;
  */
 public class DistributedLock {
 
-    private JedisLock jedisLock;
-    private String lockKey;      //锁key
-    private int waitingTime;     //等待时间
-    private int holdingTime;     //持有时间
-
-    public DistributedLock(String lockKey) {
-        this(lockKey, 3000, 10000);
-    }
+    private String lockKey;              //锁key
+    private int waitingTime = 3000;      //等待时间
+    private int holdingTime = 10000;     //持有时间
+    private JedisLock jedisLock;         //redis 锁工具
 
     /**
      * @Author: jingyan
-     * @Time: 2017/3/17 11:35
-     * @Describe:构造方法
+     * @Time: 2017/7/24 19:00
+     * @Describe: 构造方法
      */
-    public DistributedLock(String lockKey, int waitingTime, int holdingTime) {
+    public DistributedLock(String lockKey) {
         this.lockKey = lockKey;
-        this.waitingTime = waitingTime;
-        this.holdingTime = holdingTime;
         this.jedisLock = new JedisLock(lockKey.intern(), waitingTime, holdingTime);
     }
 
@@ -52,25 +44,18 @@ public class DistributedLock {
     /**
      * @Author: jingyan
      * @Time: 2017/3/17 11:35
-     * @Describe:释放锁
+     * @Describe:释放锁 (优化)
      */
-    public void releaseLock(JedisLock lock) {
-        if (lock != null) {
+    public void releaseLock() {
+        if (jedisLock != null) {
             try {
-                synchronized (lock) {
-                    lock.release();
+                synchronized (jedisLock) {
+                    jedisLock.release();
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-    }
-
-    public JedisLock getJedisLock() {
-        return jedisLock;
-    }
-
-    public void setJedisLock(JedisLock jedisLock) {
-        this.jedisLock = jedisLock;
     }
 
     public String getLockKey() {
@@ -95,5 +80,13 @@ public class DistributedLock {
 
     public void setHoldingTime(int holdingTime) {
         this.holdingTime = holdingTime;
+    }
+
+    public JedisLock getJedisLock() {
+        return jedisLock;
+    }
+
+    public void setJedisLock(JedisLock jedisLock) {
+        this.jedisLock = jedisLock;
     }
 }

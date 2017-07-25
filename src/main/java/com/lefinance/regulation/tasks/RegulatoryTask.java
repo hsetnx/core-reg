@@ -35,7 +35,7 @@ public class RegulatoryTask {
     /**
      * @Author: jingyan
      * @Time: 2017/6/29 16:06
-     * @Describe: 上报任务 每月2号 [8：01-8：10] 每隔10秒执行一次
+     * @Describe: 合同网签-上报任务 每月2号 [8：01-8：10] 每隔10秒执行一次
      */
     @Scheduled(cron = "0/10 1-10 8 2 * ?")
     public void reportSupervise107() {
@@ -45,7 +45,7 @@ public class RegulatoryTask {
     /**
      * @Author: jingyan
      * @Time: 2017/6/29 16:06
-     * @Describe: 上报任务 每月2号 [8：11-8：20] 每隔10秒执行一次
+     * @Describe: 贷款合同-上报任务 每月2号 [8：11-8：20] 每隔10秒执行一次
      */
     @Scheduled(cron = "0/10 11-20 8 2 * ?")
     public void reportSupervise102() {
@@ -55,7 +55,7 @@ public class RegulatoryTask {
     /**
      * @Author: jingyan
      * @Time: 2017/6/29 16:06
-     * @Describe: 上报任务 每月2号 [8：21-8：30] 每隔10秒执行一次
+     * @Describe: 贷款发放-上报任务 每月2号 [8：21-8：30] 每隔10秒执行一次
      */
     @Scheduled(cron = "0/10 21-30 8 2 * ?")
     public void reportSupervise103() {
@@ -65,7 +65,7 @@ public class RegulatoryTask {
     /**
      * @Author: jingyan
      * @Time: 2017/6/29 16:06
-     * @Describe: 上报任务 每月2号 [8：31-8：40] 每隔10秒执行一次
+     * @Describe: 还款计划-上报任务 每月2号 [8：31-8：40] 每隔10秒执行一次
      */
     @Scheduled(cron = "0/10 31-40 8 2 * ?")
     public void reportSupervise105() {
@@ -75,7 +75,7 @@ public class RegulatoryTask {
     /**
      * @Author: jingyan
      * @Time: 2017/6/29 16:06
-     * @Describe: 上报任务 每月2号 [8：41-8：50] 每隔10秒执行一次
+     * @Describe: 贷款回收-上报任务 每月2号 [8：41-8：50] 每隔10秒执行一次
      */
     @Scheduled(cron = "0/10 41-50 8 2 * ?")
     public void reportSupervise104() {

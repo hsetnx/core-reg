@@ -1,10 +1,10 @@
 package com.lefinance.regulation.mqlistener;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import com.alibaba.rocketmq.common.message.MessageExt;
 import com.lefinance.common.mq.push.PushListenerAbstract;
-import com.lefinance.common.utils.JSONUtil;
 import com.lefinance.regulation.domain.RegCqRepayInfo;
 import com.lefinance.regulation.service.PTLN104Service;
 import com.lefinance.regulation.service.RegBusinessDataRecordService;
@@ -45,7 +45,7 @@ public class Ptln104ConsumerListener extends PushListenerAbstract {
                     logger.info("104消息重复消费,msgId={}", messageExt.getMsgId());
                     return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                 }
-                RegCqRepayInfo record = JSONUtil.fromJson(jsonStr, RegCqRepayInfo.class);
+                RegCqRepayInfo record = JSONObject.parseObject(jsonStr, RegCqRepayInfo.class);
                 this.ptln104Service.saveBusinessDate(record);
             }
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

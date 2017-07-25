@@ -1,8 +1,7 @@
 package com.lefinance.regulation.service;
 
-import com.leFinance.creditLoan.redisDistributedLock.DispersedLock;
-import com.leFinance.creditLoan.redisDistributedLock.RegisterUtil;
-import com.lefinance.common.utils.CreatePrimaryKey;
+
+import com.lefinance.common.redislock.CreatePrimaryKey;
 import com.lefinance.common.utils.PubMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +30,8 @@ public class AcctCreateKeyService {
      */
     public String createFileSequence(String fileSequenceKey) {
         try {
-            DispersedLock dispersedLock = RegisterUtil.getDispersedLock(fileSequenceKey);
-            Object object = dispersedLock.wrap(new CreatePrimaryKey(fileSequenceKey, PubMethod.getDateStr(DATE_FROMAT_DD), HOLD_TIME_WEEK, 2), null, null);
+            CreatePrimaryKey createPrimaryKey=new CreatePrimaryKey(fileSequenceKey, PubMethod.getDateStr(DATE_FROMAT_DD), HOLD_TIME_WEEK, 2);
+            Object object = createPrimaryKey.getPrimaryKey();
             if (PubMethod.isEmpty(object)) {
                 logger.info("获取REDIS_CACHE_FILE_SEQUENCE序列号失败...");
                 throw new RuntimeException("获取REDIS_CACHE_FILE_SEQUENCE序列号失败");

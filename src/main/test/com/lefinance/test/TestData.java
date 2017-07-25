@@ -1,8 +1,8 @@
 package com.lefinance.test;
 
 import com.lefinance.Application;
-import com.lefinance.common.constant.TransEnum;
 import com.lefinance.regulation.dao.RegCqContractInfoMapper;
+import com.lefinance.regulation.service.AcctCreateKeyService;
 import com.lefinance.regulation.service.PTLN102Service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +26,13 @@ public class TestData {
     @Resource
     @Qualifier("ptln102Service")
     private PTLN102Service ptln102Service;
+    @Resource
+    private AcctCreateKeyService acctCreateKeyService;
 
     @Test
     public void createContractData(){
-        ptln102Service.reportSupervise(TransEnum.PTLN102);
+      for(int i=0;i<20;i++){
+          System.out.println(acctCreateKeyService.createFileSequence("sjadfsu"));
+      }
     }
 }

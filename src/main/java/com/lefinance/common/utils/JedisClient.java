@@ -1,6 +1,5 @@
 package com.lefinance.common.utils;
 
-import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 import redis.clients.jedis.*;
@@ -113,9 +112,6 @@ public class JedisClient {
         }
     }
 
-    public static JSONObject getJSONObject(String key) {
-        return JSONObject.fromObject(get(key));
-    }
 
     public static String get(String key) {
         assertPoolNotNull();
@@ -225,6 +221,12 @@ public class JedisClient {
             throw new NullPointerException("shardedJedisPool is null");
         }
     }
+
+    public static String getSet(String key, String value) {
+        assertPoolNotNull();
+        return jedisCluster.getSet(key, value);
+    }
+
 
     private JedisClient() {
 

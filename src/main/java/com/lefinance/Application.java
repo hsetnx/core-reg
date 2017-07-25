@@ -21,11 +21,21 @@ import java.util.Locale;
 @ComponentScan
 public class Application {
 
+    /**
+     * @Author: jingyan
+     * @Time: 2017/7/18 16:53
+     * @Describe: 项目入口
+     */
     public static void main(String[] args) {
-
+        System.out.println("Application start...");
         SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * @Author: jingyan
+     * @Time: 2017/7/18 16:54
+     * @Describe: CharacterEncodingFilter
+     */
     @Bean
     public CharacterEncodingFilter characterEncodingFilter() {
         final CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
@@ -34,6 +44,11 @@ public class Application {
         return characterEncodingFilter;
     }
 
+    /**
+     * @Author: jingyan
+     * @Time: 2017/7/18 16:54
+     * @Describe: LocaleResolver - SIMPLIFIED_CHINESE
+     */
     @Bean
     public LocaleResolver localeResolver(){
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
@@ -43,6 +58,11 @@ public class Application {
         return localeResolver;
     }
 
+    /**
+     * @Author: jingyan
+     * @Time: 2017/7/18 16:55
+     * @Describe: messageSource
+     */
     @Bean
     public MessageSource messageSource(){
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
