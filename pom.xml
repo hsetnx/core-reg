@@ -77,12 +77,6 @@
             <version>2.9.0</version>
         </dependency>
         <dependency>
-            <groupId>com.leFinance.creditLoan</groupId>
-            <artifactId>redisDistributedLock</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.jcraft</groupId>
             <artifactId>jsch</artifactId>
             <version>0.1.53</version>
@@ -112,11 +106,6 @@
                     <artifactId>javassist</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.20.0-GA</version>
         </dependency>
     </dependencies>
 
@@ -153,5 +142,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
