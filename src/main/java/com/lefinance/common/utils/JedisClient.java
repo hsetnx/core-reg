@@ -33,12 +33,8 @@ public class JedisClient {
             jedisPoolConfig.setMaxWaitMillis(Long.valueOf(bundle.getString("maxWaitTime", "1000")));
             jedisCluster = new JedisCluster(jedisClusterNodes, 5000, 5000, 1, bundle.getString("redisPassword"), jedisPoolConfig);
         } else {
-            LOG.info("********jedis fail to initialize********:" + redisStr);
+            LOG.info("********redis fail to initialize********:" + redisStr);
         }
-    }
-
-    private JedisClient() {
-
     }
 
     /**
@@ -60,11 +56,21 @@ public class JedisClient {
                 LOG.error("Getting keys error: {}", e);
             } finally {
                 LOG.debug("Connection closed.");
-                connection.close();//用完�?定要close这个链接！！�?
+                connection.close();
             }
         }
         LOG.debug("Keys gotten!");
         return keys;
+    }
+
+    private JedisClient() {
+
+    }
+
+    private static void assertPoolNotNull() {
+        if (jedisCluster == null) {
+            throw new NullPointerException("shardedJedisPool is null");
+        }
     }
 
     public static void put(String key, String value) {
@@ -214,12 +220,6 @@ public class JedisClient {
     public static Long incrBy(String key, long integer) {
         assertPoolNotNull();
         return jedisCluster.incrBy(key, integer);
-    }
-
-    private static void assertPoolNotNull() {
-        if (jedisCluster == null) {
-            throw new NullPointerException("shardedJedisPool is null");
-        }
     }
 
     public static String getSet(String key, String value) {

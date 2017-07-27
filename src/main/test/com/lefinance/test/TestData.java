@@ -1,6 +1,7 @@
 package com.lefinance.test;
 
 import com.lefinance.Application;
+import com.lefinance.config.redis.RedisTools;
 import com.lefinance.regulation.dao.RegCqContractInfoMapper;
 import com.lefinance.regulation.service.AcctCreateKeyService;
 import com.lefinance.regulation.service.PTLN102Service;
@@ -22,6 +23,8 @@ import javax.annotation.Resource;
 public class TestData {
     @Resource
     private RegCqContractInfoMapper regCqContractInfoMapper;
+    @Resource
+    private RedisTools redisTools;
 
     @Resource
     @Qualifier("ptln102Service")
@@ -31,8 +34,7 @@ public class TestData {
 
     @Test
     public void createContractData(){
-      for(int i=0;i<20;i++){
-          System.out.println(acctCreateKeyService.createFileSequence("sjadfsu"));
-      }
+        redisTools.put("wert","4563456");
+        System.out.println(redisTools.get("wert"));
     }
 }
