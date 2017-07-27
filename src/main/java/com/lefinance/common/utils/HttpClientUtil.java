@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created with hejing
+ * Created with jingyan
  * Time: 2017/7/16 22:19
  * Description: HttpClient 工具类
  */
@@ -31,7 +31,7 @@ public class HttpClientUtil {
     private static final String CHARSET = "utf-8";
 
     /**
-     * Created with hejing
+     * Created with jingyan
      * Time: 2017/7/16 22:18
      * Description: httpPost
      */
@@ -42,7 +42,7 @@ public class HttpClientUtil {
     }
 
     /**
-     * Created with hejing
+     * Created with jingyan
      * Time: 2017/7/16 22:18
      * Description: httpGet
      */
@@ -91,7 +91,7 @@ public class HttpClientUtil {
     }
 
     /**
-     * Created with: hejing.
+     * Created with: jingyan.
      * Date: 2016/9/20  11:45
      * Description: httpGet
      */
@@ -119,7 +119,7 @@ public class HttpClientUtil {
     }
 
     /**
-     * Created with hejing
+     * Created with jingyan
      * Time: 2017/7/16 22:17
      * Description: GET 参数拼装
      */

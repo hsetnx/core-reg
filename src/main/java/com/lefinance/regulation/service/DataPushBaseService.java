@@ -5,9 +5,9 @@ import com.lefinance.common.constant.RetCodeEnum;
 import com.lefinance.common.constant.TransEnum;
 import com.lefinance.common.exception.CommonException;
 import com.lefinance.common.exception.ErrorCode;
-import com.lefinance.common.utils.CommonUtils;
+import com.lefinance.common.utils.CommonUtil;
 import com.lefinance.common.utils.PubMethod;
-import com.lefinance.common.utils.RegulatoryUtils;
+import com.lefinance.common.utils.RegulatoryUtil;
 import com.lefinance.config.datapush.DataPushConfig;
 import com.lefinance.regulation.dao.RegCqFileMapper;
 import com.lefinance.regulation.domain.RegCqFile;
@@ -161,7 +161,7 @@ public abstract class DataPushBaseService {
         } catch (Exception e) {
             //更新文件表
             regCqFile.setStatus(RegulatoryContants.SendStatus.DONE);
-            regCqFile.setNextTime(RegulatoryUtils.calcuNextTime(regCqFile.getRetryNum(), regCqFile.getNextTime()));
+            regCqFile.setNextTime(RegulatoryUtil.calcuNextTime(regCqFile.getRetryNum(), regCqFile.getNextTime()));
             regCqFile.setReturnDesc(e.getMessage());
             regCqFile.setReturnData(e.getCause() == null ? "" : e.getCause().toString());
             this.regCqFileService.updateByPrimaryKeySelective(regCqFile);
@@ -184,7 +184,7 @@ public abstract class DataPushBaseService {
             logger.error("文件上传通知接口---未查询到数据 batchGid={}", batchGid);
             return false;
         }
-        String sqlNo = CommonUtils.get16RandCode();
+        String sqlNo = CommonUtil.get16RandCode();
         XmlRequestHeader header = this.buildRequestHeader(transEnum, regCqFile.getFilename(), sqlNo);
         logger.info("文件上传通知接口---header={}", header);
         XmlRequest request = new XmlRequest(header);
@@ -257,7 +257,7 @@ public abstract class DataPushBaseService {
             logger.info("查询上报结果---未查询到本地数据,batchGid={}:" + batchGid);
             return null;
         }
-        String sqlNo = CommonUtils.get16RandCode();
+        String sqlNo = CommonUtil.get16RandCode();
         XmlRequestHeader header = this.buildRequestHeader(TransEnum.PTLN199, regCqFile.getFilename(), sqlNo);
         logger.info("查询上报结果---header={}", header);
         XmlRequestBody body = this.buildRequestBody(new ArrayList(), TransEnum.PTLN199, batchGid);
@@ -339,9 +339,9 @@ public abstract class DataPushBaseService {
         //创建文件对象
         XmlRequest xmlRequest = new XmlRequest(this.buildRequestBody(businessData, transEnum, batchNo));
         //对象转为字符串
-        String xmlStr = RegulatoryUtils.objectToXmlStr(xmlRequest, XmlRequest.class);
+        String xmlStr = RegulatoryUtil.objectToXmlStr(xmlRequest, XmlRequest.class);
         //生成文件名
-        String filename = RegulatoryUtils.getFilename(transEnum, dataPushConfig.getLocalBranchId(), fileNo);
+        String filename = RegulatoryUtil.getFilename(transEnum, dataPushConfig.getLocalBranchId(), fileNo);
         //创建文件对象
         File file = new File(dataPushConfig.getLocalFileDirectory(), filename);
         if (file.exists()) {
@@ -349,7 +349,7 @@ public abstract class DataPushBaseService {
             throw new CommonException(ErrorCode.PUTFILE_FILE_ALREADY_EXISTS);
         }
         //写入文件
-        RegulatoryUtils.createFileLocal(dataPushConfig.getLocalFileDirectory(), filename, xmlStr);
+        RegulatoryUtil.createFileLocal(dataPushConfig.getLocalFileDirectory(), filename, xmlStr);
         return filename;
     }
 
@@ -404,7 +404,7 @@ public abstract class DataPushBaseService {
             logger.error("需上传文件不存在: filepath={}", filepath);
             throw new CommonException(ErrorCode.PUTFILE_FILE_NOT_EXISTS);
         }
-        RegulatoryUtils.pushFileToFtp(
+        RegulatoryUtil.pushFileToFtp(
                 file.getAbsolutePath(),
                 dataPushConfig.getFtpFileDirectory(),
                 dataPushConfig.getFtpIp(),
@@ -425,15 +425,15 @@ public abstract class DataPushBaseService {
         headerEntity.setTranCode(transEnum.getTransCode());
         headerEntity.setTranMode(transEnum.getTransMode());
         headerEntity.setBranchId(dataPushConfig.getLocalBranchId());
-        headerEntity.setTranDate(CommonUtils.formateDate(new Date(), "yyyyMMdd"));
-        headerEntity.setTranTimestamp(CommonUtils.formateDate(new Date(), "HHmmssSSS"));
+        headerEntity.setTranDate(CommonUtil.formateDate(new Date(), "yyyyMMdd"));
+        headerEntity.setTranTimestamp(CommonUtil.formateDate(new Date(), "HHmmssSSS"));
 
         headerEntity.setUserLang("CHINESE");
         headerEntity.setSeqNo(seqNo);
         headerEntity.setModuleId("CL");
         if(TransEnum.PTLN199 != transEnum){
             headerEntity.setFilePath(filePath);
-            headerEntity.setWsId(CommonUtils.getServerIP());
+            headerEntity.setWsId(CommonUtil.getServerIP());
         }
         headerEntity.setMessageType(transEnum.getMsgType());
         headerEntity.setMessageCode(transEnum.getMsgCode());
@@ -450,11 +450,11 @@ public abstract class DataPushBaseService {
             logger.error("pushMessage: XmlRequest is null.");
             throw new CommonException(ErrorCode.SYS_PARAM_INVALID);
         }
-        String requestXml = RegulatoryUtils.objectToXmlStr(xmlRequest, XmlRequest.class);
+        String requestXml = RegulatoryUtil.objectToXmlStr(xmlRequest, XmlRequest.class);
         logger.info("pushMessage: requestStr={}", requestXml);
-        String responseXml = RegulatoryUtils.sendBySocket(requestXml, dataPushConfig.getServerIp(), dataPushConfig.getServerPort());
+        String responseXml = RegulatoryUtil.sendBySocket(requestXml, dataPushConfig.getServerIp(), dataPushConfig.getServerPort());
         logger.info("pushMessage: responseXml={}", responseXml);
-        XmlResponse xmlResponse = RegulatoryUtils.xmlStrToObject(responseXml, XmlResponse.class);
+        XmlResponse xmlResponse = RegulatoryUtil.xmlStrToObject(responseXml, XmlResponse.class);
         logger.info("pushMessage: xmlResponse={}", xmlResponse);
         return xmlResponse;
     }

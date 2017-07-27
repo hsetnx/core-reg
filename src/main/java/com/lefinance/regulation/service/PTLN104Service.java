@@ -2,7 +2,7 @@ package com.lefinance.regulation.service;
 
 import com.lefinance.common.constant.RegulatoryContants;
 import com.lefinance.common.constant.TransEnum;
-import com.lefinance.common.utils.CommonUtils;
+import com.lefinance.common.utils.CommonUtil;
 import com.lefinance.common.utils.PubMethod;
 import com.lefinance.regulation.dao.RegCqRepayInfoMapper;
 import com.lefinance.regulation.domain.RegCqRepayInfo;
@@ -53,7 +53,7 @@ public class PTLN104Service extends DataPushBaseService {
             logger.info("数据锁定---104未查询到数据...");
             return null;
         }
-        String batchGid = CommonUtils.getUUIDWithoutSeparator();
+        String batchGid = CommonUtil.getUUIDWithoutSeparator();
         this.updateRegCqIssueInfo(dataList, RegulatoryContants.DataStatus.REPORTING, batchGid);
         return batchGid;
     }

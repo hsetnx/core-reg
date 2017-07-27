@@ -11,7 +11,7 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import java.util.Map;
 
 /**
- * @Author: lemon
+ * @Author: jingyan
  * @Time: 2017/7/27 11:16
  * @Describe: Velocity工具类
  */
@@ -22,7 +22,7 @@ public class VelocityUtil {
     private static final String TEMPLATE_LOCAL_DIRECTORY = "template/";
 
     /**
-     * @Author: lemon
+     * @Author: jingyan
      * @Time: 2017/7/27 13:45
      * @Describe: 静态代码块，类被第一次加载时，初始化执行一次，以后均不执行;
      *             初始化 {velocityEngine} 对象
@@ -39,7 +39,7 @@ public class VelocityUtil {
     }
 
     /**
-     * @Author: lemon
+     * @Author: jingyan
      * @Time: 2017/7/27 11:28
      * @Describe: 通过模板生成新文件
      */
@@ -48,7 +48,7 @@ public class VelocityUtil {
                 templateFileName, newFilePath, newFileName, JSONObject.toJSONString(map));
         String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, TEMPLATE_LOCAL_DIRECTORY + templateFileName, "UTF-8", map);
         logger.debug("替换模板后的字符串为：body={}", body);
-        String newFileFullPath = FileUtil.createJsonFile(body, newFilePath, newFileName);
+        String newFileFullPath = FileUtil.createFile(body, newFilePath, newFileName);
         logger.info("生成的文件路径为：newFileFullPath={}", newFileFullPath);
         return newFileFullPath;
     }

@@ -2,7 +2,7 @@ package com.lefinance.regulation.service;
 
 import com.lefinance.common.constant.RegulatoryContants;
 import com.lefinance.common.constant.TransEnum;
-import com.lefinance.common.utils.CommonUtils;
+import com.lefinance.common.utils.CommonUtil;
 import com.lefinance.common.utils.PubMethod;
 import com.lefinance.regulation.dao.RegCqContractInfoCoCustomerInfoMapper;
 import com.lefinance.regulation.dao.RegCqContractInfoMapper;
@@ -59,7 +59,7 @@ public class PTLN102Service extends DataPushBaseService {
             logger.info("数据锁定---102未查询到数据...");
             return null;
         }
-        String batchGid = CommonUtils.getUUIDWithoutSeparator();
+        String batchGid = CommonUtil.getUUIDWithoutSeparator();
         //更新合同表数据状态,锁住这批数据
         this.updateRegCqContractInfo(dataList, RegulatoryContants.DataStatus.REPORTING, batchGid);
         return batchGid;

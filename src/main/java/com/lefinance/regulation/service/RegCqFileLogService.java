@@ -1,6 +1,6 @@
 package com.lefinance.regulation.service;
 
-import com.lefinance.common.utils.CommonUtils;
+import com.lefinance.common.utils.CommonUtil;
 import com.lefinance.regulation.dao.RegCqFileLogMapper;
 import com.lefinance.regulation.domain.RegCqFileLog;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class RegCqFileLogService {
         regCqFileLog.setBatchGid(batchGid);
         regCqFileLog.setIsSuccess(isSuccess);
         regCqFileLog.setRemark(remark);
-        regCqFileLog.setGid(CommonUtils.getUUIDWithoutSeparator());
+        regCqFileLog.setGid(CommonUtil.getUUIDWithoutSeparator());
         regCqFileLog.setCreateTime(new Date());
         regCqFileLog.setUpdateTime(new Date());
         regCqFileLog.setCreateUser("SYSTEM");
@@ -43,7 +43,7 @@ public class RegCqFileLogService {
      * @Describe: 保存日志信息
      */
     public RegCqFileLog insert(RegCqFileLog regCqFileLog) {
-        regCqFileLog.setGid(CommonUtils.getUUIDWithoutSeparator());
+        regCqFileLog.setGid(CommonUtil.getUUIDWithoutSeparator());
         regCqFileLog.setCreateTime(new Date());
         regCqFileLog.setUpdateTime(new Date());
         regCqFileLog.setCreateUser("SYSTEM");

@@ -22,11 +22,11 @@ import java.util.Date;
 import java.util.Properties;
 
 /**
- * Created by chenyong6 on 2017/4/28.
+ * Created by jingyan on 2017/4/28.
  */
-public class RegulatoryUtils {
+public class RegulatoryUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(RegulatoryUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(RegulatoryUtil.class);
 
     /**
      * 对象转换为XML字符串
@@ -261,7 +261,7 @@ public class RegulatoryUtils {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(branchId);
         stringBuffer.append("-");
-        stringBuffer.append(CommonUtils.formateDate(new Date(), "yyyyMMdd"));
+        stringBuffer.append(CommonUtil.formateDate(new Date(), "yyyyMMdd"));
         stringBuffer.append("-");
         stringBuffer.append(transEnum.getDataType());
         stringBuffer.append("-");

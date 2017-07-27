@@ -16,7 +16,7 @@ import java.util.UUID;
  * @Time: 2017/7/27 14:03
  * @Describe:
  */
-public class CommonUtils {
+public class CommonUtil {
 
     public static String getUUID() {
         return UUID.randomUUID().toString();
