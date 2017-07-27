@@ -11,8 +11,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * Created by chenyong6 on 2017/4/14.
+/** 
+ * @Author: jingyan 
+ * @Time: 2017/7/27 14:03
+ * @Describe:
  */
 public class CommonUtils {
 

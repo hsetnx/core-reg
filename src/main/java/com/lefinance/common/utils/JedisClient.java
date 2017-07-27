@@ -12,8 +12,8 @@ import java.util.*;
  * Description: redis 工具类
  */
 public class JedisClient {
-    private static final Logger LOG = Logger.getLogger(JedisClient.class);
 
+    private static final Logger LOG = Logger.getLogger(JedisClient.class);
     private static JedisCluster jedisCluster;
 
     static {
@@ -35,6 +35,10 @@ public class JedisClient {
         } else {
             LOG.info("********jedis fail to initialize********:" + redisStr);
         }
+    }
+
+    private JedisClient() {
+
     }
 
     /**
@@ -66,7 +70,6 @@ public class JedisClient {
     public static void put(String key, String value) {
         assertPoolNotNull();
         jedisCluster.set(key, value);
-
     }
 
     public static void putWithExpire(String key, String value, int seconds) {
@@ -111,7 +114,6 @@ public class JedisClient {
             jedisCluster.set(entry.getKey(), entry.getValue());
         }
     }
-
 
     public static String get(String key) {
         assertPoolNotNull();
@@ -172,7 +174,6 @@ public class JedisClient {
         return jedisCluster.hget(hmKeyname, keyname);
     }
 
-
     public static int setnx(String key, String value) {
         assertPoolNotNull();
         return jedisCluster.setnx(key, value).intValue();
@@ -200,7 +201,6 @@ public class JedisClient {
         return codeSet;
     }
 
-
     public static List<String> brpop(String key) {
         assertPoolNotNull();
         return jedisCluster.brpop(0, key);
@@ -227,13 +227,4 @@ public class JedisClient {
         return jedisCluster.getSet(key, value);
     }
 
-
-    private JedisClient() {
-
-    }
-
-    public static void main(String[] args) throws Exception {
-        JedisClient.put("ASD", "111");
-        System.out.println(JedisClient.get("ASD"));
-    }
 }

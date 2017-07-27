@@ -1,0 +1,57 @@
+{
+  "spec": {
+    "dataSchema": {
+      "dataSource": "test_campaign",
+      "granularitySpec": {
+        "intervals": [
+          "${param1}"
+        ],
+        "queryGranularity": "day",
+        "segmentGranularity": "day",
+        "type": "uniform"
+      },
+      "metricsSpec": ${param2},
+      "parser": {
+        "parseSpec": {
+          "columns": [
+            "timestamp",
+            "date",
+            "campaign_id",
+            "pv",
+            "uv",
+            "click",
+            "clicker"
+          ],
+          "dimensionsSpec": {
+            "dimensions": [
+              "date",
+              "campaign_id"
+            ]
+          },
+          "format": "csv",
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "iso"
+          }
+        },
+        "type": "string"
+      }
+    },
+    "ioConfig": {
+      "inputSpec": {
+        "paths": "/druid/csv/campaign.csv",
+        "type": "static"
+      },
+      "type": "hadoop"
+    },
+    "tuningConfig": {
+      "jobProperties": {},
+      "partitionsSpec": {
+        "targetPartitionSize": 5000000,
+        "type": "hashed"
+      },
+      "type": "hadoop"
+    }
+  },
+  "type": "index_hadoop"
+}
