@@ -48,7 +48,7 @@ public class VelocityUtil {
                 templateFileName, newFilePath, newFileName, JSONObject.toJSONString(map));
         String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, TEMPLATE_LOCAL_DIRECTORY + templateFileName, "UTF-8", map);
         logger.debug("替换模板后的字符串为：body={}", body);
-        String newFileFullPath = FileUtil.createAndWriteFile(newFilePath, newFileName, body);
+        String newFileFullPath = FileUtil.createAndWriteFile(newFilePath, newFileName, body, false);
         logger.info("生成的文件路径为：newFileFullPath={}", newFileFullPath);
         return newFileFullPath;
     }

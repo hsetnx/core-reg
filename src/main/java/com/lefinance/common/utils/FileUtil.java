@@ -145,4 +145,13 @@ public class FileUtil {
         return null;
     }
 
+
+    public static void writeFileByLine(FileChannel channel, ByteBuffer buf, String[] line) {
+        try {
+            String linStr = PubMethod.arrayToString(line, ',');
+            channel.write(buf.wrap(linStr.getBytes("utf-8")), channel.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

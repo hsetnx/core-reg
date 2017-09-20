@@ -18,6 +18,7 @@ public class PubMethod {
 
     /**
      * 获得异常的详细信息
+     *
      * @param e
      * @return
      */
@@ -148,13 +149,13 @@ public class PubMethod {
      * Date: 2016/9/18  20:27
      * Description: list to String 加间隔符
      */
-    public static String listToString(List list, char separator) {
-        if (list == null || list.size() == 0) {
+    public static String arrayToString(String[] lineArray, char separator) {
+        if (lineArray == null || lineArray.length == 0) {
             return "";
         }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i)).append(separator);
+        for (int i = 0; i < lineArray.length; i++) {
+            sb.append(lineArray[i]).append(separator);
         }
         return sb.toString().substring(0, sb.toString().length() - 1);
     }
@@ -211,6 +212,7 @@ public class PubMethod {
         String formatDate = sdf.format(date);
         return formatDate;
     }
+
     /**
      * Created with: jingyan.
      * Date: 2016/9/25  17:43
@@ -260,7 +262,7 @@ public class PubMethod {
      * @Author: jingyan
      * @Time: 2017/9/20 9:43
      * @Describe: 两个日期计算间隔天数
-     *
+     * <p>
      * fDate   减数
      * oDate   被减数
      */
@@ -285,4 +287,13 @@ public class PubMethod {
         return randNumber + "";
     }
 
+    public static void main(String[] args) {
+        CsvWriter csvWriter = new CsvWriter();
+        csvWriter.initCsvWriter("D://aa.csv", false);
+        for (int i = 0; i < 1000; i++) {
+            String[] a = {"ASD" + i, "FGH" + i, "HJK" + i, "KLJ" + i, "QWE" + i};
+            csvWriter.writeFileByLine(a);
+        }
+        csvWriter.closeCsvWriter();
+    }
 }
