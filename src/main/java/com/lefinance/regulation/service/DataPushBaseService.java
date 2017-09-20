@@ -31,7 +31,6 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -425,8 +424,8 @@ public abstract class DataPushBaseService {
         headerEntity.setTranCode(transEnum.getTransCode());
         headerEntity.setTranMode(transEnum.getTransMode());
         headerEntity.setBranchId(dataPushConfig.getLocalBranchId());
-        headerEntity.setTranDate(CommonUtil.formateDate(new Date(), "yyyyMMdd"));
-        headerEntity.setTranTimestamp(CommonUtil.formateDate(new Date(), "HHmmssSSS"));
+        headerEntity.setTranDate(PubMethod.getDateStr("yyyyMMdd"));
+        headerEntity.setTranTimestamp(PubMethod.getDateStr("HHmmssSSS"));
 
         headerEntity.setUserLang("CHINESE");
         headerEntity.setSeqNo(seqNo);

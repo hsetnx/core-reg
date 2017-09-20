@@ -257,6 +257,24 @@ public class PubMethod {
     }
 
     /**
+     * @Author: jingyan
+     * @Time: 2017/9/20 9:43
+     * @Describe: 两个日期计算间隔天数
+     *
+     * fDate   减数
+     * oDate   被减数
+     */
+    public static int daysBetween(Date fDate, Date oDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fDate);
+        long fDateTime = cal.getTimeInMillis();
+        cal.setTime(oDate);
+        long oDateTime = cal.getTimeInMillis();
+        Long intervalDays = (oDateTime - fDateTime) / (1000 * 3600 * 24);
+        return intervalDays.intValue();
+    }
+
+    /**
      * Created with: jingyan.
      * Date: 2016/10/11  16:37
      * Description: 获取验证码

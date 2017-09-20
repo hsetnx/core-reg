@@ -261,7 +261,7 @@ public class RegulatoryUtil {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(branchId);
         stringBuffer.append("-");
-        stringBuffer.append(CommonUtil.formateDate(new Date(), "yyyyMMdd"));
+        stringBuffer.append(PubMethod.getDateStr("yyyyMMdd"));
         stringBuffer.append("-");
         stringBuffer.append(transEnum.getDataType());
         stringBuffer.append("-");
