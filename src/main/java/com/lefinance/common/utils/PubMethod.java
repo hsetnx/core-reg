@@ -146,22 +146,6 @@ public class PubMethod {
 
     /**
      * Created with: jingyan.
-     * Date: 2016/9/18  20:27
-     * Description: list to String 加间隔符
-     */
-    public static String arrayToString(String[] lineArray, char separator) {
-        if (lineArray == null || lineArray.length == 0) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < lineArray.length; i++) {
-            sb.append(lineArray[i]).append(separator);
-        }
-        return sb.toString().substring(0, sb.toString().length() - 1);
-    }
-
-    /**
-     * Created with: jingyan.
      * Date: 2016/9/25  18:48
      * Description: 数字前面补0 返回字符串
      */
@@ -288,12 +272,23 @@ public class PubMethod {
     }
 
     public static void main(String[] args) {
-        CsvWriter csvWriter = new CsvWriter();
-        csvWriter.initCsvWriter("D://aa.csv", false);
-        for (int i = 0; i < 1000; i++) {
-            String[] a = {"ASD" + i, "FGH" + i, "HJK" + i, "KLJ" + i, "QWE" + i};
-            csvWriter.writeFileByLine(a);
+        long s=System.currentTimeMillis();
+        // 1 new 对象
+        CsvFileUtil csvWriteUtil = new CsvFileUtil();
+        try {
+            //2 初始化要写入的文件（true为追加，false为覆盖新写）
+            csvWriteUtil.initCsvWriter("D://ccc/bbb/aa.csv", true);
+            for (int i = 0; i < 5000; i++) {
+                String[] a = {"ASD" + i, "FGH" + i, "HJK" + i, "KLJ" + i, "QWE" + i};
+                //3 按行写入
+                csvWriteUtil.writeFileByLine(a);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //4  关闭文件
+            csvWriteUtil.closeCsvWriter();
         }
-        csvWriter.closeCsvWriter();
+        System.out.println(System.currentTimeMillis()-s);
     }
 }

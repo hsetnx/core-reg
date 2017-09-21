@@ -43,12 +43,11 @@ public class VelocityUtil {
      * @Time: 2017/7/27 11:28
      * @Describe: 通过模板生成新文件
      */
-    public static String mergeTemplateFile(String templateFileName, Map<String, Object> map, String newFilePath, String newFileName) {
-        logger.info("mergeTemplateFile 参数为：templateFileName={},newFilePath={},newFileName={},map={}",
-                templateFileName, newFilePath, newFileName, JSONObject.toJSONString(map));
-        String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, TEMPLATE_LOCAL_DIRECTORY + templateFileName, "UTF-8", map);
-        logger.debug("替换模板后的字符串为：body={}", body);
-        String newFileFullPath = FileUtil.createAndWriteFile(newFilePath, newFileName, body, false);
+    public static String mergeTemplateFile(String templateName, String newFilePath, Map<String, Object> paramMap) {
+        logger.info("mergeTemplateFile 参数为：templateName={},newFilePath={},paramMap={}", templateName, newFilePath, JSONObject.toJSONString(paramMap));
+        String content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, TEMPLATE_LOCAL_DIRECTORY + templateName, "UTF-8", paramMap);
+        logger.debug("替换模板后的字符串为：content={}", content);
+        String newFileFullPath = FileUtil.writeFileByNio(newFilePath, content, false);
         logger.info("生成的文件路径为：newFileFullPath={}", newFileFullPath);
         return newFileFullPath;
     }

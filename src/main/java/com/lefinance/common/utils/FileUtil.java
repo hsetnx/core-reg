@@ -1,7 +1,5 @@
 package com.lefinance.common.utils;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -15,85 +13,24 @@ public class FileUtil {
 
     /**
      * @Author: jingyan
-     * @Time: 2017/9/6 18:20
-     * @Describe: 创建并写入文件
-     * @Param : appendable 追加 还是 覆盖 文件
-     */
-    public static String createAndWriteFile(String filePath, String fileName, String content, boolean appendable) {
-        try {
-            //创建文件
-            String fullPath = filePath + File.separator + fileName;
-            File file = new File(fullPath);
-            // 如果父目录不存在，创建父目录
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
-            // 如果文件不存在，就创建文件
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            //写入文件
-            return writeFileByNio(fullPath, content, appendable);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
-     * @Author: jingyan
-     * @Time: 2017/9/7 10:03
-     * @Describe: 写入文件
-     */
-    public static void writeStringToFile(String filepath, String filename, String data) throws Exception {
-        File file = new File(filepath, filename);
-        try {
-            FileUtils.writeStringToFile(file, data, "utf-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new Exception("文件写操作异常！");
-        }
-    }
-
-    /**
-     * @Author: jingyan
-     * @Time: 2017/9/6 16:45
-     * @Describe: 创建文件
-     */
-    public static String createFile(String filePath, String fileName) {
-        try {
-            String fullPath = filePath + File.separator + fileName;
-            File file = new File(fullPath);
-            // 如果父目录不存在，创建父目录
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
-            // 如果已存在,删除旧文件
-            if (file.exists()) {
-                file.delete();
-            }
-            file.createNewFile();
-            return fullPath;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
-     * @Author: jingyan
      * @Time: 2017/9/6 16:48
      * @Describe: NIO 写入文件
      */
     public static String writeFileByNio(String filePath, String content, boolean appendable) {
+        if (null == filePath || "".equals(filePath)) {
+            return null;
+        }
         FileOutputStream fos = null;
         FileChannel channel = null;
         try {
-            fos = new FileOutputStream(filePath, appendable);
+            File file = new File(filePath);
+            // 如果父目录不存在，创建父目录
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+            fos = new FileOutputStream(file, appendable);
             channel = fos.getChannel();
             ByteBuffer buf = ByteBuffer.wrap(content.getBytes());
-            buf.put(content.getBytes());
-            buf.flip();
             channel.write(buf);
             return filePath;
         } catch (IOException e) {
@@ -119,6 +56,9 @@ public class FileUtil {
      * @Describe: 读取文件（50M 以下 300ms 以内）
      */
     public static String readFileByNio(String filePath) {
+        if (null == filePath || "".equals(filePath)) {
+            return null;
+        }
         FileInputStream fis = null;
         FileChannel channel = null;
         try {
@@ -145,13 +85,4 @@ public class FileUtil {
         return null;
     }
 
-
-    public static void writeFileByLine(FileChannel channel, ByteBuffer buf, String[] line) {
-        try {
-            String linStr = PubMethod.arrayToString(line, ',');
-            channel.write(buf.wrap(linStr.getBytes("utf-8")), channel.size());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
