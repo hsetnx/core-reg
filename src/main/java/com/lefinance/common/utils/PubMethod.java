@@ -1,6 +1,16 @@
 package com.lefinance.common.utils;
 
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.lefinance.common.utils.QRcode.QRcodeUtil;
+
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.ParseException;
@@ -271,24 +281,12 @@ public class PubMethod {
         return randNumber + "";
     }
 
-    public static void main(String[] args) {
-        long s=System.currentTimeMillis();
-        // 1 new 对象
-        CsvFileUtil csvWriteUtil = new CsvFileUtil();
-        try {
-            //2 初始化要写入的文件（true为追加，false为覆盖新写）
-            csvWriteUtil.initCsvWriter("D://ccc/bbb/aa.csv", true);
-            for (int i = 0; i < 5000; i++) {
-                String[] a = {"ASD" + i, "FGH" + i, "HJK" + i, "KLJ" + i, "QWE" + i};
-                //3 按行写入
-                csvWriteUtil.writeFileByLine(a);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            //4  关闭文件
-            csvWriteUtil.closeCsvWriter();
-        }
-        System.out.println(System.currentTimeMillis()-s);
+    public static void main(String[] args) throws WriterException, IOException {
+        String content = "http://www.cnblogs.com/";
+        //存放logo的文件夹
+        String path = "E://img";
+        File file = new File("D://aaa/ccc/aae.txt");
+        System.out.println(file.getAbsolutePath());
+
     }
 }

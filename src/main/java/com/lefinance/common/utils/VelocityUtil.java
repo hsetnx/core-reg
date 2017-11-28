@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -50,5 +51,42 @@ public class VelocityUtil {
         String newFileFullPath = FileUtil.writeFileByNio(newFilePath, content, false);
         logger.info("生成的文件路径为：newFileFullPath={}", newFileFullPath);
         return newFileFullPath;
+    }
+
+    public static void main(String[] args) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("title", "第一页");
+
+
+        String a1 = ".a1{\n" +
+                "    width: 150px;\n" +
+                "    font-size: 10px;\n" +
+                "    margin-top:5px;\n" +
+                "}";
+        String a2 = ".a2{\n" +
+                "    width: 150px;\n" +
+                "    font-size: 20px;\n" +
+                "    margin-top:5px;\n" +
+                "}";
+        String a3 = ".a3{\n" +
+                "    width: 150px;\n" +
+                "    font-size: 40px;\n" +
+                "    margin-top:5px;\n" +
+                "}";
+        String[] cssArray = {a1, a2, a3};
+
+        String div1 = "<div class=\"a1\">\n" +
+                "<a href=\"http:www.baidu.com\">汉字</a>"+
+                "</div>";
+        String div2 = "<div class=\"a2\">\n" +
+                "汉字"+
+                "</div>";
+        String div3 = "<div class=\"a3\">\n" +
+                "汉字"+
+                "</div>";
+        String[] divArray = {div1, div2, div3};
+        paramMap.put("cssArray", cssArray);
+        paramMap.put("divArray", divArray);
+        mergeTemplateFile("html_template.vm", "D://aa.html", paramMap);
     }
 }

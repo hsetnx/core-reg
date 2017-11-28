@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+    #if(!$cssArray.isEmpty())
+        #foreach($item in $!{cssArray})
+            $!{item}
+        #end
+    #end
+    </style>
+    <title>${title}</title>
+</head>
+
+<body>
+    #if(!$divArray.isEmpty())
+        #foreach($item in $!{divArray})
+        $!{item}
+        #end
+    #end
+</body>
+</html>
