@@ -1,13 +1,15 @@
-package com.lefinance.regulation.mqlistener;
+package com.lefinance.regulation.mq.listener;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import com.alibaba.rocketmq.common.message.MessageExt;
 import com.lefinance.common.mq.push.PushListenerAbstract;
-import com.lefinance.regulation.domain.RegCqRepayInfo;
-import com.lefinance.regulation.service.PTLN104Service;
+import com.lefinance.regulation.domain.RegCqContractInfo;
+import com.lefinance.regulation.domain.RegCqIssueInfo;
+import com.lefinance.regulation.service.PTLN103Service;
 import com.lefinance.regulation.service.RegBusinessDataRecordService;
+import net.minidev.json.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -21,11 +23,11 @@ import java.util.List;
  * @Describe:
  */
 @Component
-public class Ptln104ConsumerListener extends PushListenerAbstract {
+public class Ptln103ConsumerListener extends PushListenerAbstract {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
-    private PTLN104Service ptln104Service;
+    private PTLN103Service ptln103Service;
     @Resource
     private RegBusinessDataRecordService regBusinessDataRecordService;
 
@@ -39,18 +41,18 @@ public class Ptln104ConsumerListener extends PushListenerAbstract {
         try {
             for (MessageExt messageExt : messageExts) {
                 String jsonStr = new String(messageExt.getBody());
-                logger.info("104消息消费,msgBody={}", jsonStr);
+                logger.info("103消息消费,msgBody={}", jsonStr);
                 boolean flag = regBusinessDataRecordService.checkMsgRecord(messageExt.getMsgId(), jsonStr);
                 if (!flag) {
-                    logger.info("104消息重复消费,msgId={}", messageExt.getMsgId());
+                    logger.info("103消息重复消费,msgId={}", messageExt.getMsgId());
                     return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                 }
-                RegCqRepayInfo record = JSONObject.parseObject(jsonStr, RegCqRepayInfo.class);
-                this.ptln104Service.saveBusinessDate(record);
+                RegCqIssueInfo record = JSONObject.parseObject(jsonStr, RegCqIssueInfo.class);
+                this.ptln103Service.saveBusinessDate(record);
             }
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         } catch (Exception e) {
-            logger.error("104消息消费异常：" + e.getMessage());
+            logger.error("103消息消费异常：" + e.getMessage());
         }
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }

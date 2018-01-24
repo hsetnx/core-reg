@@ -1,4 +1,4 @@
-package com.lefinance.config.mq;
+package com.lefinance.regulation.mq.config;
 
 import com.lefinance.common.mq.producer.DefaultProducer;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ public class DefaultProducerConfig {
     /**
      * @Author: jingyan
      * @Time: 2017/6/30 16:01
-     * @Describe: 创建默认的生产者, 单例
+     * @Describe: 创建默认的生产者, 单例,连接多个mq，可创建多个
      * 用法 :   @Resource DefaultProducer defaultProducer
      */
     @Bean(name = "defaultProducer", initMethod = "init", destroyMethod = "destroy")

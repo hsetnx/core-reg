@@ -15,8 +15,8 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!-- jdbc -->
-        <jdbcConnection driverClass="${druid.driver-class}" connectionURL="${druid.url}"
-                        userId="${druid.username}" password="${druid.password}">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/website?useUnicode=true&amp;characterEncoding=utf8"
+                        userId="root" password="root">
         </jdbcConnection>
         <!-- domain -->
         <javaModelGenerator targetPackage="com.lefinance.regulation.domain" targetProject="src/main/java"/>
@@ -26,7 +26,7 @@
         <javaClientGenerator targetPackage="com.lefinance.regulation.dao" targetProject="src/main/java" type="XMLMAPPER"/>
         <!--通配所有表-->
         <!--<table tableName="%">-->
-        <table tableName="reg_business_data_record">
+        <table tableName="credit_user_paper">
             <!--mysql 配置-->
             <!--<generatedKey column="SERIAL_ID" sqlStatement="Mysql" identity="true"/>-->
             <!--oracle 配置-->

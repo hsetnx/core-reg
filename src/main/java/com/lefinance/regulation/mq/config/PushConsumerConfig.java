@@ -1,7 +1,7 @@
-package com.lefinance.config.mq;
+package com.lefinance.regulation.mq.config;
 
 import com.lefinance.common.mq.push.DefaultPushConsumer;
-import com.lefinance.regulation.mqlistener.*;
+import com.lefinance.regulation.mq.listener.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

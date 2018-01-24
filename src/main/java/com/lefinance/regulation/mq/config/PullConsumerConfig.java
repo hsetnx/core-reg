@@ -1,4 +1,4 @@
-package com.lefinance.config.mq;
+package com.lefinance.regulation.mq.config;
 
 /**
  * @Author: jingyan

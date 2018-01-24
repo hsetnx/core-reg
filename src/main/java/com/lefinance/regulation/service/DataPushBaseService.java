@@ -5,6 +5,7 @@ import com.lefinance.common.constant.RetCodeEnum;
 import com.lefinance.common.constant.TransEnum;
 import com.lefinance.common.exception.CommonException;
 import com.lefinance.common.exception.ErrorCode;
+import com.lefinance.common.mq.producer.DefaultProducer;
 import com.lefinance.common.utils.CommonUtil;
 import com.lefinance.common.utils.PubMethod;
 import com.lefinance.common.utils.RegulatoryUtil;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.io.File;
@@ -50,6 +52,8 @@ public abstract class DataPushBaseService {
     private RegCqFileService regCqFileService;
     @Resource
     private RegCqFileLogService regCqFileLogService;
+    @Resource
+    private DefaultProducer defaultProducer;
 
 
     /**

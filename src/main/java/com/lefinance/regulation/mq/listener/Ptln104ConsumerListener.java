@@ -1,12 +1,12 @@
-package com.lefinance.regulation.mqlistener;
+package com.lefinance.regulation.mq.listener;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import com.alibaba.rocketmq.common.message.MessageExt;
 import com.lefinance.common.mq.push.PushListenerAbstract;
-import com.lefinance.regulation.domain.RegCqContractInfo;
-import com.lefinance.regulation.service.PTLN102Service;
+import com.lefinance.regulation.domain.RegCqRepayInfo;
+import com.lefinance.regulation.service.PTLN104Service;
 import com.lefinance.regulation.service.RegBusinessDataRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +21,11 @@ import java.util.List;
  * @Describe:
  */
 @Component
-public class Ptln102ConsumerListener extends PushListenerAbstract {
+public class Ptln104ConsumerListener extends PushListenerAbstract {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
-    private PTLN102Service ptln102Service;
+    private PTLN104Service ptln104Service;
     @Resource
     private RegBusinessDataRecordService regBusinessDataRecordService;
 
@@ -39,18 +39,18 @@ public class Ptln102ConsumerListener extends PushListenerAbstract {
         try {
             for (MessageExt messageExt : messageExts) {
                 String jsonStr = new String(messageExt.getBody());
-                logger.info("102消息消费,msgBody={}", jsonStr);
+                logger.info("104消息消费,msgBody={}", jsonStr);
                 boolean flag = regBusinessDataRecordService.checkMsgRecord(messageExt.getMsgId(), jsonStr);
                 if (!flag) {
-                    logger.info("102消息重复消费,msgId={}", messageExt.getMsgId());
+                    logger.info("104消息重复消费,msgId={}", messageExt.getMsgId());
                     return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                 }
-                RegCqContractInfo regCqContractInfo = JSONObject.parseObject(jsonStr,RegCqContractInfo.class);
-                this.ptln102Service.saveBusinessDate(regCqContractInfo);
+                RegCqRepayInfo record = JSONObject.parseObject(jsonStr, RegCqRepayInfo.class);
+                this.ptln104Service.saveBusinessDate(record);
             }
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         } catch (Exception e) {
-            logger.error("102消息消费异常：" + e.getMessage());
+            logger.error("104消息消费异常：" + e.getMessage());
         }
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
