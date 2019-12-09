@@ -1,16 +1,6 @@
 package com.lefinance.common.utils;
 
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.lefinance.common.utils.QRcode.QRcodeUtil;
-
-import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.ParseException;
@@ -44,62 +34,86 @@ public class PubMethod {
      * Date: 2016/9/25  18:41
      * Description: 各种非空判断
      */
-    public static boolean isEmpty(String Value) {
-        return (Value == null || Value.trim().equals(""));
-    }
+    public static boolean isEmpty(String value) {
+        if (value == null || "".equals(value.trim())) {
+            return true;
+        } else {
+            return false;
+        }
 
-    public static boolean isEmpty(StringBuffer Value) {
-
-        return (Value == null || (Value.toString().trim()).equals(""));
     }
 
     public static boolean isEmpty(List list) {
-        if (list == null || list.size() == 0)
+        if (list == null || list.size() == 0) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public static boolean isEmpty(Set set) {
-        if (set == null || set.size() == 0)
+        if (set == null || set.size() == 0) {
             return true;
-        else
+        } else {
             return false;
+        }
+
     }
 
     public static boolean isEmpty(Map map) {
-        if (map == null || map.size() == 0)
+        if (map == null || map.size() == 0) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
-    public static boolean isEmpty(Object Value) {
-        if (Value == null)
+    public static boolean isEmpty(Object value) {
+        if (value == null) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public static boolean isEmpty(Double value) {
-        if (value == null || value.doubleValue() == 0.0)
+        if (value == null || value.doubleValue() == 0.0) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public static boolean isEmpty(Long obj) {
-        if (obj == null || obj.longValue() == 0)
+        if (obj == null || obj.longValue() == 0) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
-    public static boolean isEmpty(Object[] Value) {
-        if (Value == null || Value.length == 0)
+    public static boolean isEmpty(Integer obj) {
+        if (obj == null) {
             return true;
-        else
+        } else {
             return false;
+        }
+    }
+
+    public static boolean isEmptyOrZero(Integer obj) {
+        if (obj == null || obj.intValue() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isEmpty(Object[] value) {
+        if (value == null || value.length == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -134,24 +148,6 @@ public class PubMethod {
             rstr = rstr + u[Integer.parseInt(str[i] + "")];
         }
         return rstr;
-    }
-
-    /**
-     * Created with: jingyan.
-     * Date: 2016/9/25  18:42
-     * Description: 按要求切割字符串
-     */
-    public static String[] splitString(String srcStr, String splitter) {
-        if (srcStr == null) return new String[]{""};
-        String[] tmpArr = srcStr.split(splitter);
-        if (tmpArr == null || tmpArr.length == 0) {
-            return new String[]{""};
-        } else {
-            for (int index = 0; index < tmpArr.length; index++) {
-                tmpArr[index] = tmpArr[index].trim();
-            }
-            return tmpArr;
-        }
     }
 
     /**
@@ -281,12 +277,4 @@ public class PubMethod {
         return randNumber + "";
     }
 
-    public static void main(String[] args) throws WriterException, IOException {
-        String content = "http://www.cnblogs.com/";
-        //存放logo的文件夹
-        String path = "E://img";
-        File file = new File("D://aaa/ccc/aae.txt");
-        System.out.println(file.getAbsolutePath());
-
-    }
 }
